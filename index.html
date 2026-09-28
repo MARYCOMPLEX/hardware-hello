@@ -6,7 +6,327 @@
 <style>
 :root{--ink:#17211b;--muted:#68756c;--paper:#f4f0e6;--card:#fbfaf5;--line:#d8d5c9;--accent:#e25b37;--green:#1c6b58;--yellow:#e6b84a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Songti SC',serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#6b715f .6px,transparent .6px);background-size:7px 7px}.shell{display:grid;grid-template-columns:300px minmax(0,860px);gap:48px;max-width:1260px;margin:auto;padding:40px 32px}.rail{position:sticky;top:28px;height:calc(100vh - 56px);display:flex;flex-direction:column}.eyebrow{font:700 12px/1.2 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}h1{font-size:52px;line-height:1.04;letter-spacing:-.05em;margin:14px 0 16px}h2{font-size:34px;line-height:1.15;margin:56px 0 18px;border-top:2px solid var(--ink);padding-top:15px}h3{font-size:24px;line-height:1.2;margin:32px 0 10px;color:var(--green)}p{font-size:17px;margin:12px 0}a{color:var(--green);text-decoration-thickness:2px;text-underline-offset:3px}.intro{font-size:19px;color:#405046}.meta{font:13px/1.5 ui-monospace,monospace;color:var(--muted);border-left:3px solid var(--yellow);padding-left:14px;margin:26px 0}.toc{margin-top:26px;overflow:auto;padding-right:12px}.toc a{display:block;padding:5px 0;text-decoration:none;color:var(--muted);font-size:14px}.toc a:hover{color:var(--accent);transform:translateX(4px)}.progress{margin-top:auto;font:12px ui-monospace,monospace;color:var(--muted)}.bar{height:6px;background:#dedbd0;margin-top:8px}.bar i{display:block;width:0;height:100%;background:var(--accent);transition:width .3s}.book{background:rgba(251,250,245,.6);padding:22px 48px 70px;border-left:1px solid var(--line);border-right:1px solid var(--line)}blockquote{border-left:5px solid var(--accent);margin:26px 0;padding:9px 20px;background:#efe9da;color:#4a554e}pre{overflow:auto;background:#18231f;color:#e9eadf;border-radius:5px;padding:18px 20px;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:5px 5px 0 #d2cdbd}code{font-family:ui-monospace,monospace;background:#e8e3d5;padding:2px 5px;border-radius:3px;font-size:.9em}pre code{background:none;padding:0}table{border-collapse:collapse;width:100%;margin:18px 0;background:var(--card);font-size:15px}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:#e7eee8;color:var(--green)}li{margin:5px 0}.chapter{scroll-margin-top:25px}.chapter:first-child h2{margin-top:20px}.note{background:#e2eee8;border:1px solid #bad0c1;padding:16px 20px;margin:22px 0}.exercise{background:#fff4d8;border:1px solid #e6cf8a;padding:16px 20px;margin:22px 0}.top{position:fixed;right:26px;bottom:25px;border:1px solid var(--ink);background:var(--card);padding:9px 12px;text-decoration:none;font:12px ui-monospace,monospace}@media(max-width:900px){.shell{display:block;padding:24px 16px}.rail{position:relative;top:auto;height:auto;padding-bottom:20px}.toc{max-height:180px}.book{padding:8px 18px 50px;border:0}h1{font-size:42px}h2{font-size:29px}}
 </style></head>
-<body id="top"><div class="shell"><aside class="rail"><div><div class="eyebrow">A field guide / 01</div><h1>Hardware<br><span style="color:var(--accent)">Hello</span></h1><p class="intro">用 AI 学会 ESP32 多功能调试器</p><div class="meta">给软件工程师的嵌入式系统入门书<br>ESP-IDF · FreeRTOS · UART · SPI · I²C · SWD</div></div><nav class="toc"><a href="#p1">第一篇 · 心智模型</a><a href="#p4">第二篇 · ESP-IDF</a><a href="#p6">第三篇 · 总线与协议</a><a href="#p9">第四篇 · 读懂项目</a><a href="#p12">第五篇 · AI 调试</a><a href="#p14">第六篇 · 实践路线</a><a href="#appendix">附录</a></nav><div class="progress">阅读进度<div class="bar"><i id="progress"></i></div></div></aside><main class="book"><section class="chapter" id="p1"><div class="eyebrow">Hardware Hello · 2026</div><h2>序：你要学会的不是一块板子</h2><p>这是一套从“会写软件”走到“能读懂、编译、烧录、调试多板硬件系统”的入门路线。主案例来自 <a href="https://github.com/MARYCOMPLEX/Multi-Function-ESP32-Debugger">Multi-Function-ESP32-Debugger</a>，包含 ESP32-C6 主机、多个 ESP32-S3 仪器模块和一个 ESP32-C3 陀螺仪模块。</p><p>完整书稿请打开仓库中的 <a href="book.md">book.md</a>。本页面提供在线阅读入口和核心章节导航。</p><div class="note"><strong>建议：</strong>先通读第 1～5 章，再照第 14 章做实验。不要一开始就买齐所有硬件。</div></section><section class="chapter" id="p4"><h2>你会得到什么</h2><ul><li>理解固件、启动链、FreeRTOS 任务和 ESP-IDF 组件。</li><li>能解释 UART、SPI、I²C、USB、ESP-NOW 和 SWD 的角色。</li><li>能从 C6_Screen、S3_LogicAnalyser、S3_Thermal 等工程反推系统架构。</li><li>能用 AI 做源码导航、根因分析和小步验证。</li></ul><h3>最快上手路径</h3><pre><code>编译 → 单板启动 → 两板 UART → LinkIt 握手 → 一个传感器 → UI → 无线 DAP</code></pre></section><section class="chapter" id="p6"><h2>总线与协议的核心观念</h2><p>UART 是字节流，SPI 是带时钟的主从事务，I²C 是带地址和寄存器语义的共享总线，SWD 是调试器到目标 MCU 的调试链路。把它们混为“串口”是最常见的入门错误。</p><table><tr><th>层</th><th>本项目例子</th><th>先验证什么</th></tr><tr><td>电气</td><td>3.3 V、GND、TX/RX、SDA/SCL</td><td>供电、共地、电平、引脚</td></tr><tr><td>驱动</td><td>UART、SPI、I²C、USB</td><td>初始化和波形</td></tr><tr><td>协议</td><td>LinkIt、instrument frame、DAP</td><td>长度、序号、CRC、状态机</td></tr><tr><td>应用</td><td>波形、热图、环境数据、SWD</td><td>数据是否正确路由</td></tr></table></section><section class="chapter" id="p9"><h2>把项目读懂</h2><p>阅读顺序不要从最大的 <code>main.c</code> 开始。先看根目录 README，再看各工程的 CMake 和 <code>sdkconfig.defaults</code>，随后进入 <code>shared/linkit_sdk</code>、<code>shared/instrument_protocol</code>，最后跟一个具体模块的数据流。</p><div class="exercise"><strong>练习：</strong>画出“MLX90640 → S3_Thermal → LinkIt → C6_Screen → LVGL”的数据流，并在每条箭头旁写明数据格式。</div></section><section class="chapter" id="p12"><h2>用 AI，而不是被 AI 牵着走</h2><p>每次提问都给目标、约束、现象和验收方式。让 AI 把结论分成源码证据、数据手册证据、测量证据和推测。AI 可以解释寄存器，但不能替你确认线有没有接错。</p><pre><code>目标：让 S3_LogicAnalyser 在不影响 SWD 的情况下暂停 I²C sniff。
-约束：ESP-IDF 5.5.x，不能改变 GPIO 分配。
+<body id="top"><div class="shell"><aside class="rail"><div><div class="eyebrow">A field guide / 01</div><h1>Hardware<br><span style="color:var(--accent)">Hello</span></h1><p class="intro">用 AI 学会 ESP32 多功能调试器</p><div class="meta">给软件工程师的嵌入式系统入门书<br>ESP-IDF · FreeRTOS · UART · SPI · I²C · SWD</div></div><nav class="toc"><a href="#hardware-hello" class="toc-1">Hardware Hello</a><a href="#用-ai-学会-esp32-多功能调试器" class="toc-2">用 AI 学会 ESP32 多功能调试器</a><a href="#读者说明你要学会的不是一块板子" class="toc-2">读者说明：你要学会的不是一块板子</a><a href="#第一篇建立嵌入式心智模型" class="toc-1">第一篇　建立嵌入式心智模型</a><a href="#第-1-章从软件服务到硬件系统" class="toc-2">第 1 章　从软件服务到硬件系统</a><a href="#第-2-章数字电路的最低必要知识" class="toc-2">第 2 章　数字电路的最低必要知识</a><a href="#第-3-章cfreertos-与并发" class="toc-2">第 3 章　C、FreeRTOS 与并发</a><a href="#第二篇esp-idf-工具链" class="toc-1">第二篇　ESP-IDF 工具链</a><a href="#第-4-章工程组件和构建系统" class="toc-2">第 4 章　工程、组件和构建系统</a><a href="#第-5-章烧录串口和日志" class="toc-2">第 5 章　烧录、串口和日志</a><a href="#第三篇总线与协议" class="toc-1">第三篇　总线与协议</a><a href="#第-6-章uart先让两块板说话" class="toc-2">第 6 章　UART：先让两块板说话</a><a href="#第-7-章i²c地址寄存器和探测" class="toc-2">第 7 章　I²C：地址、寄存器和探测</a><a href="#第-8-章spi采样与时序" class="toc-2">第 8 章　SPI、采样与时序</a><a href="#第四篇读懂这套项目" class="toc-1">第四篇　读懂这套项目</a><a href="#第-9-章linkit把多块板组织成系统" class="toc-2">第 9 章　LinkIt：把多块板组织成系统</a><a href="#第-10-章lvgl-与-ui" class="toc-2">第 10 章　LVGL 与 UI</a><a href="#第-11-章无线-cmsis-dap" class="toc-2">第 11 章　无线 CMSIS-DAP</a><a href="#第五篇用-ai-高效学习和调试" class="toc-1">第五篇　用 AI 高效学习和调试</a><a href="#第-12-章ai-结对编程协议" class="toc-2">第 12 章　AI 结对编程协议</a><a href="#第-13-章调试方法从症状到根因" class="toc-2">第 13 章　调试方法：从症状到根因</a><a href="#第六篇实践路线" class="toc-1">第六篇　实践路线</a><a href="#第-14-章四周入门计划" class="toc-2">第 14 章　四周入门计划</a><a href="#第-15-章从零采购与风险控制" class="toc-2">第 15 章　从零采购与风险控制</a><a href="#附录-a命令速查" class="toc-1">附录 A　命令速查</a><a href="#附录-b源码导航" class="toc-1">附录 B　源码导航</a><a href="#附录-c最终检查清单" class="toc-1">附录 C　最终检查清单</a></nav><div class="progress">阅读进度<div class="bar"><i id="progress"></i></div></div></aside><main class="book"><div class="book-content"><h1 id="hardware-hello">Hardware Hello</h1>
+<h2 id="用-ai-学会-esp32-多功能调试器">用 AI 学会 ESP32 多功能调试器</h2>
+<blockquote>给软件工程师的嵌入式系统入门书</blockquote>
+<p><strong>版本</strong>：2026-09  </p>
+<p><strong>目标</strong>：从“会写软件”走到“能读懂、编译、烧录、调试一套多板硬件系统”。</p>
+<p>---</p>
+<h2 id="读者说明你要学会的不是一块板子">读者说明：你要学会的不是一块板子</h2>
+<p>这个项目由多个 ESP32 固件组成：ESP32-C6 负责屏幕和主机逻辑，ESP32-S3 负责逻辑分析、热成像、环境传感器和 CMSIS-DAP，另有 ESP32-C3 陀螺仪模块。它同时涉及 C、FreeRTOS、UART、SPI、I²C、USB、ESP-NOW、LVGL、协议设计和硬件调试。</p>
+<p>软件工程师的优势是抽象、分层、测试和版本控制。你的短板通常是电压、电平、时序、启动模式、芯片资源和“代码之外的一切”。本书把项目拆成可验证的小问题：先让一个 GPIO 工作，再理解一个总线，再理解一帧数据，最后理解整套系统。</p>
+<p>每章都有四个部分：概念、项目对应、AI 用法、练习。AI 是解释器、导航员和结对调试者；它不能替你测量电压，也不能替你确认一根线真的接到了正确的 GPIO。</p>
+<p>---</p>
+<h1 id="第一篇建立嵌入式心智模型">第一篇　建立嵌入式心智模型</h1>
+<h2 id="第-1-章从软件服务到硬件系统">第 1 章　从软件服务到硬件系统</h2>
+<h3 id="11-固件是什么">1.1 固件是什么</h3>
+<p>固件是运行在芯片上的程序。它没有操作系统提供的进程、文件系统和无限资源，而是直接管理 CPU、内存、GPIO、外设中断、无线电和电源状态。ESP-IDF 提供了启动代码、驱动、FreeRTOS、网络栈、构建系统和烧录工具。</p>
+<p>程序的生命周期大致是：</p>
+<pre><code>上电 → ROM 启动 → bootloader → 应用镜像 → app_main → 任务/中断/事件循环</code></pre>
+<h3 id="12-硬件是运行时的一部分">1.2 硬件是运行时的一部分</h3>
+<p>在 Web 服务里，端口错了通常是配置问题；在硬件里，GPIO 错了可能导致无信号、短路或外设损坏。你需要同时维护三张表：</p>
+<ul>
+<li><strong>芯片表</strong>：ESP32-C6、ESP32-S3、ESP32-C3 的目标、Flash、核数和外设；</li>
+<li><strong>连接表</strong>：TX 对 RX、SDA 对 SDA、GND 共地、电压域；</li>
+<li><strong>协议表</strong>：谁先发、帧长多少、校验怎么做、断线如何恢复。</li>
+</ul>
+<h3 id="13-本项目的系统图">1.3 本项目的系统图</h3>
+<pre><code>                 ┌──────────────┐
+                 │ C6_Screen    │  主机 + LVGL
+                 └──────┬───────┘
+            LinkIt UART│DET / ESP-NOW
+       ┌───────────────┼───────────────────┐
+       ▼               ▼                   ▼
+ S3_LogicAnalyser  S3_Thermal   S3_Environment_Sensor
+ 采样/I²C/UART/SWD  MLX90640      BME280/BH1750/SGP40
+       ▲
+       │ ESP-NOW DAP
+ S3_otg_cmsisdap ── USB OTG ── 电脑</code></pre>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>你是嵌入式导师。请只根据下面这段架构，解释每块板的职责、输入输出、
+依赖关系和最小可验证行为。不要猜测没有给出的器件型号。
+[粘贴 README 架构图]</code></pre>
+<h3 id="练习">练习</h3>
+<ol>
+<li>用一句话解释“主机”和“从机”。</li>
+<li>在纸上画出 C6 与一个 S3 模块的 TX/RX/GND。</li>
+<li>为每条连接标注“电气信号”和“协议含义”。</li>
+</ol>
+<p>---</p>
+<h2 id="第-2-章数字电路的最低必要知识">第 2 章　数字电路的最低必要知识</h2>
+<h3 id="21-电压电流和电平">2.1 电压、电流和电平</h3>
+<p>ESP32 通常使用 3.3 V 逻辑。<code>HIGH</code> 和 <code>LOW</code> 是电压范围，不是抽象布尔值。两个模块通信前要确认：供电电压、IO 电平、最大电流、是否需要上拉、是否允许 5 V 信号进入 3.3 V GPIO。</p>
+<h3 id="22-gpio-的四种常用角色">2.2 GPIO 的四种常用角色</h3>
+<ul>
+<li>输入：读取按键、DET、外部信号；</li>
+<li>输出：驱动 LED、片选、复位、方波；</li>
+<li>复用外设：让 UART/SPI/I²C 控制器接管引脚；</li>
+<li>中断输入：边沿或电平变化时触发回调。</li>
+</ul>
+<h3 id="23-上拉与总线空闲态">2.3 上拉与总线空闲态</h3>
+<p>I²C 的 SDA/SCL 是开漏结构，设备只能主动拉低，需要电阻把总线拉高。UART 是推挽信号，TX 空闲通常为高。DET 线则是项目自定义的检测信号，必须按板级定义理解。</p>
+<h3 id="24-共地">2.4 共地</h3>
+<p>没有共同参考地，逻辑高低没有共同基准。跨板 UART、SPI、SWD 都要先接 GND，再接信号线。</p>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>请把 GPIO、UART、SPI、I²C、SWD 的电气行为分别用“谁驱动、谁采样、
+空闲态、时钟来源、常见故障”五列解释，并指出哪些问题只能用万用表或示波器确认。</code></pre>
+<h3 id="练习">练习</h3>
+<p>用万用表测量开发板 3V3、GND 和一个 GPIO，写下空闲电压；不要在不确定电压时连接外部模块。</p>
+<p>---</p>
+<h2 id="第-3-章cfreertos-与并发">第 3 章　C、FreeRTOS 与并发</h2>
+<h3 id="31-app_main-不是普通-main">3.1 <code>app_main</code> 不是普通 <code>main</code></h3>
+<p>ESP-IDF 启动后调用 <code>app_main</code>。它通常负责初始化驱动、创建任务和启动服务，然后由 FreeRTOS 调度多个任务。</p>
+<pre><code>void app_main(void) {
+    init_board();
+    xTaskCreate(sensor_task, &quot;sensor&quot;, 4096, NULL, 5, NULL);
+}</code></pre>
+<h3 id="32-任务队列事件组">3.2 任务、队列、事件组</h3>
+<ul>
+<li><strong>任务</strong>：长期运行的独立执行单元；</li>
+<li><strong>队列</strong>：在任务之间传递数据；</li>
+<li><strong>事件组</strong>：表达多个状态位；</li>
+<li><strong>互斥锁</strong>：保护共享资源；</li>
+<li><strong>中断</strong>：处理必须快速响应的硬件事件，复杂工作交给任务。</li>
+</ul>
+<h3 id="33-资源意识">3.3 资源意识</h3>
+<p>ESP32 的栈和堆是有限的。日志格式化、大数组、LVGL 缓冲区、无线缓存和传感器帧都会消耗内存。每个任务都应能回答：栈多大、运行在哪个核、优先级是多少、谁会阻塞它。</p>
+<h3 id="项目对应">项目对应</h3>
+<p><code>S3_LogicAnalyser</code> 把逻辑采集、UART/I²C sniff、SWD 接收拆成不同职责；<code>S3_otg_cmsisdap</code> 把 USB、屏幕、触摸和无线传输组合起来。阅读源码时先画任务图，再看函数细节。</p>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>下面是一个 FreeRTOS 任务函数。请标出所有阻塞点、共享资源、可能的竞态、
+栈风险和看门狗风险，并给出最小修复方案。不要重写无关代码。</code></pre>
+<h3 id="练习">练习</h3>
+<p>把 <code>examples/hello_gpio.c</code> 改成一个任务驱动的 LED，并加入一个按键事件队列。</p>
+<p>---</p>
+<h1 id="第二篇esp-idf-工具链">第二篇　ESP-IDF 工具链</h1>
+<h2 id="第-4-章工程组件和构建系统">第 4 章　工程、组件和构建系统</h2>
+<h3 id="41-工程目录">4.1 工程目录</h3>
+<p>ESP-IDF 工程最小结构：</p>
+<pre><code>project/
+├── CMakeLists.txt
+├── sdkconfig.defaults
+├── main/
+│   ├── CMakeLists.txt
+│   └── main.c
+└── components/</code></pre>
+<p>本项目还使用 <code>shared/</code>，各工程通过 <code>EXTRA_COMPONENT_DIRS</code> 引用共享协议和驱动。</p>
+<h3 id="42-组件">4.2 组件</h3>
+<p>组件是可复用的编译单元。<code>main/CMakeLists.txt</code> 中的 <code>REQUIRES</code> 描述依赖，组件自己的头文件和实现则封装内部细节。把协议、设备驱动和 UI 分成组件，能让同一套 LinkIt 逻辑服务多块板。</p>
+<h3 id="43-配置">4.3 配置</h3>
+<p><code>sdkconfig</code> 是具体构建配置，<code>sdkconfig.defaults</code> 是可复现的默认值。芯片目标和 Flash 容量必须匹配真实硬件：项目中 C6、S3、C3 的目标不同，S3 板还分别使用 2 MB 和 16 MB Flash 配置。</p>
+<h3 id="44-命令">4.4 命令</h3>
+<pre><code># 安装并加载 ESP-IDF 5.5.x
+source ~/esp/esp-idf/export.sh
+
+cd C6_Screen
+idf.py set-target esp32c6
+idf.py build
+idf.py -p /dev/cu.usbmodemXXXX flash monitor</code></pre>
+<p>每个子目录都是独立工程，不能从仓库根目录盲目执行 <code>idf.py build</code>。</p>
+<h3 id="常见错误">常见错误</h3>
+<ul>
+<li><code>IDF_PATH not found</code>：没有加载 <code>export.sh</code>；</li>
+<li>目标芯片不匹配：重新 <code>idf.py set-target</code>；</li>
+<li>组件找不到：检查 <code>EXTRA_COMPONENT_DIRS</code> 和相对路径；</li>
+<li>Flash header 与芯片不符：检查 <code>sdkconfig.defaults</code>；</li>
+<li>端口被占用：关闭其他串口监视器。</li>
+</ul>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>这是 ESP-IDF 的完整构建错误。请按“第一条根因、证据、最小修复、验证命令”输出，
+不要把后续连锁错误当成独立问题。
+[粘贴错误]</code></pre>
+<h3 id="练习">练习</h3>
+<p>只编译 <code>S3_Thermal</code>，不烧录。记录 IDF 版本、目标芯片、生成的 bin 文件和 Flash 配置。</p>
+<p>---</p>
+<h2 id="第-5-章烧录串口和日志">第 5 章　烧录、串口和日志</h2>
+<h3 id="51-烧录是什么">5.1 烧录是什么</h3>
+<p><code>idf.py flash</code> 通常通过 USB-UART 或 USB Serial/JTAG 把 bootloader、分区表和应用写入 Flash。<code>monitor</code> 读取串口日志。烧录成功不等于应用逻辑正确：还要看启动日志、任务初始化和外设探测结果。</p>
+<h3 id="52-日志是观测接口">5.2 日志是观测接口</h3>
+<p>使用分层日志：</p>
+<pre><code>ESP_LOGI(TAG, &quot;LinkIt mode=%d&quot;, mode);
+ESP_LOGW(TAG, &quot;sensor not found at 0x%02X&quot;, address);
+ESP_LOGE(TAG, &quot;frame CRC failed&quot;);</code></pre>
+<p>日志必须包含足够上下文：板名、模块名、GPIO、地址、状态和错误码。</p>
+<h3 id="53-最小验证顺序">5.3 最小验证顺序</h3>
+<ol>
+<li>芯片能启动；</li>
+<li><code>app_main</code> 执行；</li>
+<li>GPIO 初始化；</li>
+<li>总线初始化；</li>
+<li>设备探测；</li>
+<li>帧发送/接收；</li>
+<li>UI 或上位机展示。</li>
+</ol>
+<p>不要在第一步失败时跳到第七步排查。</p>
+<p>---</p>
+<h1 id="第三篇总线与协议">第三篇　总线与协议</h1>
+<h2 id="第-6-章uart先让两块板说话">第 6 章　UART：先让两块板说话</h2>
+<p>UART 没有时钟线，双方预先约定波特率、数据位、停止位和校验。连接必须交叉：TX→RX、RX→TX，并共地。</p>
+<p>本项目的 LinkIt 链路使用 UART 加 DET，C6 与 S3 通过握手确认身份，成功后切换高速 UART。代码阅读顺序：先找 UART 初始化，再找握手字符串，再找状态机，再找发送队列。</p>
+<h3 id="粘包与半包">粘包与半包</h3>
+<p>串口是字节流，不是消息流。一次 <code>read</code> 可能只得到半帧，也可能得到多帧。接收器要使用缓冲区和状态机：</p>
+<pre><code>寻找帧头 → 读取固定头 → 读取长度 → 等待完整负载 → 校验 → 分发</code></pre>
+<h3 id="练习">练习</h3>
+<p>把 <code>examples/linkit_frame.md</code> 的设计实现为 Python 解码器，构造三种输入：半帧、两帧粘在一起、CRC 错误。</p>
+<p>---</p>
+<h2 id="第-7-章i²c地址寄存器和探测">第 7 章　I²C：地址、寄存器和探测</h2>
+<p>I²C 使用 SDA、SCL 和 GND。设备通过 7 位地址识别，主机读写寄存器。传感器驱动通常包含：初始化、探测、配置、读取、缩放和错误处理。</p>
+<p>项目中 MLX90640、MAX17048、BME280、BH1750、SGP40 都体现了同一模式：总线层只负责字节传输，设备层负责寄存器语义，应用层负责业务数据。</p>
+<h3 id="常见故障">常见故障</h3>
+<ul>
+<li>地址写成 8 位格式；</li>
+<li>SDA/SCL 接反；</li>
+<li>没有上拉；</li>
+<li>总线被设备拉死；</li>
+<li>电源电压不匹配；</li>
+<li>设备需要等待启动时间。</li>
+</ul>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>请根据这段 I²C 驱动代码生成“地址、寄存器、读写长度、错误条件、物理连线”的表格，
+并标出哪些值来自代码、哪些值需要查数据手册。</code></pre>
+<p>---</p>
+<h2 id="第-8-章spi采样与时序">第 8 章　SPI、采样与时序</h2>
+<p>SPI 由时钟、MOSI、MISO、CS 组成。主机提供时钟，CS 选择设备。模式 0/1/2/3 决定时钟空闲电平和采样边沿。</p>
+<p><code>S3_LogicAnalyser</code> 使用 SPI 连接 Pico 采集部分，并把采样结果转成仪器帧；这正是“硬件时序→驱动缓冲区→协议帧→UI 图表”的完整链路。</p>
+<p>逻辑分析仪的核心不是“读 GPIO”，而是在固定采样率下可靠地捕捉边沿，并处理缓冲区、触发条件和丢样。软件工程师应把采样率、缓冲深度和吞吐量当作容量规划问题。</p>
+<h3 id="练习">练习</h3>
+<p>画出一次 SPI 事务：CS 拉低、发送命令、等待若干时钟、读取数据、CS 拉高。再说明如果 CS 一直为低会发生什么。</p>
+<p>---</p>
+<h1 id="第四篇读懂这套项目">第四篇　读懂这套项目</h1>
+<h2 id="第-9-章linkit把多块板组织成系统">第 9 章　LinkIt：把多块板组织成系统</h2>
+<p>LinkIt 的价值是统一主机和设备模块的通信。你可以把它看成一个嵌入式 RPC 系统，但它运行在 UART 和 ESP-NOW 上。</p>
+<h3 id="状态机">状态机</h3>
+<pre><code>DISCONNECTED
+      │发现设备
+HANDSHAKING
+      │身份交换成功
+WIRED ─────────────┐
+      │拔出 pogo    │重新插入
+WIRELESS ──────────┘</code></pre>
+<p>握手通常包含：询问、设备响应、ACK、MAC 地址交换、模式切换。设计状态机时，必须为超时、重复握手、设备重启、帧丢失和链路恢复定义行为。</p>
+<h3 id="帧协议">帧协议</h3>
+<p>一帧至少要有：魔数/版本、模块类型、长度、序号、负载和校验。模块类型让 C6 不需要知道每个传感器的具体实现，只需把数据路由到对应页面。</p>
+<h3 id="阅读路径">阅读路径</h3>
+<pre><code>shared/linkit_sdk
+→ shared/instrument_protocol
+→ C6_Screen/components/instrument_runtime
+→ 某一个 S3 工程的 main.c</code></pre>
+<p>先理解数据如何流动，再理解每一行驱动代码。</p>
+<p>---</p>
+<h2 id="第-10-章lvgl-与-ui">第 10 章　LVGL 与 UI</h2>
+<p>LVGL 是嵌入式 GUI 库。它需要显示驱动、输入设备、定时 tick 和线程安全的调用边界。<code>C6_Screen</code> 用 LVGL 显示热成像、逻辑分析波形、I²C/UART 监听和环境数据。</p>
+<p>UI 的数据更新应与采集任务解耦：采集任务生产结构化数据，运行时组件分发，UI 任务在合适的上下文更新控件。不要在中断里直接操作 LVGL。</p>
+<h3 id="ai-提问模板">AI 提问模板</h3>
+<pre><code>请把这个 UI 页面拆成“状态模型、数据输入、渲染、用户事件、生命周期”五部分，
+并告诉我如何写一个不依赖真实传感器的模拟数据源。</code></pre>
+<p>---</p>
+<h2 id="第-11-章无线-cmsis-dap">第 11 章　无线 CMSIS-DAP</h2>
+<p>CMSIS-DAP 是调试器与主机之间的协议；SWD 是调试器与目标 MCU 之间的物理接口。这个项目把 DAP 包从 S3 OTG 发射机通过 ESP-NOW 送到 S3 逻辑分析仪，再由接收机用 GPIO bit-bang 操作 SWD。</p>
+<pre><code>电脑 USB → S3_otg_cmsisdap → ESP-NOW → S3_LogicAnalyser → SWD → 目标 MCU</code></pre>
+<p>这里有三个独立问题：USB 是否枚举、无线帧是否到达、SWD 时序是否正确。排查时必须逐层验证，不能直接把“调试器不能连接”归因于某一个函数。</p>
+<p>SWD 连接至少涉及 SWCLK、SWDIO、nRESET 和 GND。目标 MCU 的电压域、复位状态和调试权限会影响结果。</p>
+<p>---</p>
+<h1 id="第五篇用-ai-高效学习和调试">第五篇　用 AI 高效学习和调试</h1>
+<h2 id="第-12-章ai-结对编程协议">第 12 章　AI 结对编程协议</h2>
+<h3 id="121-先给上下文再提问题">12.1 先给上下文，再提问题</h3>
+<p>低质量问题：“这段代码怎么改？”  </p>
+<p>高质量问题：</p>
+<pre><code>目标：让 S3_LogicAnalyser 在不影响 SWD 的情况下暂停 I²C sniff。
+约束：ESP-IDF 5.5.x，不能改变 GPIO 分配，必须保留现有 LinkIt 帧格式。
 现象：SWD 读 IDCODE 偶发失败，日志如下……
-请输出：假设、证据、最小改动、验证步骤、回滚方式。</code></pre></section><section class="chapter" id="p14"><h2>四周实践计划</h2><ol><li><strong>第 1 周：</strong>安装 ESP-IDF，编译一个工程，读懂 CMake。</li><li><strong>第 2 周：</strong>烧录 GPIO 和串口示例，完成两板 UART 回环。</li><li><strong>第 3 周：</strong>读取一个 I²C 传感器，写带 CRC 的小帧协议。</li><li><strong>第 4 周：</strong>编译 C6 与 S3 模块，跟踪一帧数据到 UI。</li></ol><p>详细章节、命令速查、故障表、源码导航和完整练习见 <a href="book.md">完整书稿</a>。</p></section><section class="chapter" id="appendix"><h2>资料和边界</h2><p>作者在嘉立创主页公开了 ESP 加 PICO 简易开发版、环境传感器模块、屏幕模块、简易热成像模块和简易陀螺仪模块。本书把这些页面作为实践地图；工程详情页当前显示 BOM、3D 模型和附件暂无公开数据，因此不把未确认的器件值写成事实。</p><p>来源映射见 <a href="docs/source-map.md">docs/source-map.md</a>。</p></section></main></div><a class="top" href="#top">↑ 顶部</a><script>const p=document.querySelector('#progress');const update=()=>{const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max?Math.min(100,y/max*100):0)+'%'};addEventListener('scroll',update,{passive:true});update();</script></body></html>
+请输出：假设、证据、最小改动、验证步骤和回滚方式。</code></pre>
+<h3 id="122-让-ai-读代码的顺序">12.2 让 AI 读代码的顺序</h3>
+<ol>
+<li>先让 AI 建目录地图；</li>
+<li>再让它列出入口和依赖；</li>
+<li>再画数据流和状态机；</li>
+<li>再解释单个函数；</li>
+<li>最后才让它提出修改。</li>
+</ol>
+<h3 id="123-防止-ai-猜硬件">12.3 防止 AI 猜硬件</h3>
+<p>要求 AI 给每条结论标注：源码证据、数据手册证据、测量证据或推测。GPIO 表可以来自源码，但“某个连接器在实物上的方向”必须看 PCB 或测量确认。</p>
+<h3 id="124-ai-生成代码的验收">12.4 AI 生成代码的验收</h3>
+<p>每次只接受一个可验证变化：编译、静态检查、串口日志、逻辑分析仪波形或单元测试。不要一次让 AI 重写整个工程。</p>
+<p>---</p>
+<h2 id="第-13-章调试方法从症状到根因">第 13 章　调试方法：从症状到根因</h2>
+<h3 id="131-分层定位">13.1 分层定位</h3>
+<pre><code>电源 → 时钟/复位 → 启动日志 → GPIO → 总线波形 → 驱动 → 协议 → UI</code></pre>
+<h3 id="132-一张故障表">13.2 一张故障表</h3>
+<table><thead><tr><th>症状</th><th>第一检查</th></tr></thead><tbody>
+<tr><td>无串口输出</td><td>端口、波特率、供电、启动模式</td></tr>
+<tr><td>设备未找到</td><td>GND、供电、地址、上拉、引脚复用</td></tr>
+<tr><td>UART 有乱码</td><td>波特率、TX/RX、地线、电平</td></tr>
+<tr><td>帧校验失败</td><td>长度、粘包、端序、CRC 初值</td></tr>
+<tr><td>屏幕白屏</td><td>背光、电源、SPI 引脚、初始化时序</td></tr>
+<tr><td>SWD 不稳定</td><td>SWCLK/SWDIO、目标电压、复位、并发干扰</td></tr>
+<h3 id="133-记录实验">13.3 记录实验</h3>
+</tbody></table>
+<p>每次实验记录：日期、提交号、板号、供电、电缆、命令、日志、波形、结论。实验记录比“我好像改过一个地方”更有价值。</p>
+<p>---</p>
+<h1 id="第六篇实践路线">第六篇　实践路线</h1>
+<h2 id="第-14-章四周入门计划">第 14 章　四周入门计划</h2>
+<h3 id="第-1-周只做软件">第 1 周：只做软件</h3>
+<ul>
+<li>安装 ESP-IDF 5.5.x；</li>
+<li>编译一个 C6 或 S3 工程；</li>
+<li>读懂 CMake、组件和 <code>sdkconfig.defaults</code>；</li>
+<li>不接外设，完成源码地图。</li>
+</ul>
+<h3 id="第-2-周单板-gpio-与串口">第 2 周：单板 GPIO 与串口</h3>
+<ul>
+<li>烧录 GPIO 示例；</li>
+<li>观察启动日志；</li>
+<li>修改日志并验证；</li>
+<li>用第二块板做 UART 回环。</li>
+</ul>
+<h3 id="第-3-周总线和协议">第 3 周：总线和协议</h3>
+<ul>
+<li>接一个 I²C 传感器；</li>
+<li>读取 WHO_AM_I 或芯片 ID；</li>
+<li>写一个带长度和 CRC 的小帧协议；</li>
+<li>用 Python 端模拟另一块板。</li>
+</ul>
+<h3 id="第-4-周系统化实践">第 4 周：系统化实践</h3>
+<ul>
+<li>编译 C6_Screen 和一个 S3 模块；</li>
+<li>画 LinkIt 状态机；</li>
+<li>跟踪一帧数据从传感器到 UI；</li>
+<li>选择逻辑分析仪或 CMSIS-DAP 作为专项。</li>
+</ul>
+<p>---</p>
+<h2 id="第-15-章从零采购与风险控制">第 15 章　从零采购与风险控制</h2>
+<p>最小学习套件：一块 ESP32-S3 开发板、一块 ESP32-C6 开发板、USB 数据线、万用表、面包板和 3.3 V 传感器模块。先不要一开始购买全部热成像、屏幕和定制 PCB。</p>
+<p>完整复刻需要多个芯片板、屏幕、传感器、Pico/RP2040 采集部分、pogo 连接器和目标 MCU。作者的嘉立创页面目前没有公开 BOM/附件，采购应以设计图和实际料号为准，不能只按固件中的宏定义下单。</p>
+<h3 id="复刻顺序">复刻顺序</h3>
+<pre><code>编译 → 单板启动 → 两板 UART → LinkIt 握手 → 一个传感器 → UI → 无线 DAP → 定制 PCB</code></pre>
+<p>---</p>
+<h1 id="附录-a命令速查">附录 A　命令速查</h1>
+<pre><code>source ~/esp/esp-idf/export.sh
+idf.py --version
+idf.py set-target esp32s3
+idf.py build
+idf.py -p PORT flash monitor
+idf.py fullclean</code></pre>
+<h1 id="附录-b源码导航">附录 B　源码导航</h1>
+<table><thead><tr><th>想学的主题</th><th>先读</th></tr></thead><tbody>
+<tr><td>构建</td><td>各工程 <code>CMakeLists.txt</code></td></tr>
+<tr><td>芯片配置</td><td>各工程 <code>sdkconfig.defaults</code></td></tr>
+<tr><td>主机通信</td><td><code>shared/linkit_sdk</code></td></tr>
+<tr><td>仪器帧</td><td><code>shared/instrument_protocol</code></td></tr>
+<tr><td>SWD</td><td><code>shared/dap_engine</code></td></tr>
+<tr><td>无线 DAP</td><td><code>shared/wireless_dap</code></td></tr>
+<tr><td>热成像</td><td><code>shared/mlx90640</code>、<code>S3_Thermal</code></td></tr>
+<tr><td>UI</td><td><code>C6_Screen/components</code></td></tr>
+<h1 id="附录-c最终检查清单">附录 C　最终检查清单</h1>
+</tbody></table>
+<ul>
+<li>[ ] 能说出每块板的职责和芯片目标；</li>
+<li>[ ] 能独立编译至少一个工程；</li>
+<li>[ ] 能解释 UART、SPI、I²C、SWD 的连线；</li>
+<li>[ ] 能从日志判断启动失败还是设备探测失败；</li>
+<li>[ ] 能画出 LinkIt 状态机；</li>
+<li>[ ] 能让 AI 根据证据分析，而不是让它猜硬件；</li>
+<li>[ ] 能用一次实验验证一个假设；</li>
+<li>[ ] 能记录提交号、配置和测量结果。</li>
+</ul>
+<p>当这些项目完成后，你已经掌握了阅读和改造这套多板嵌入式系统所需的基本方法。</p></div></main></div><a class="top" href="#top">↑ 顶部</a><script>const p=document.querySelector('#progress');const update=()=>{const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max?Math.min(100,y/max*100):0)+'%'};addEventListener('scroll',update,{passive:true});update();</script></body></html>
