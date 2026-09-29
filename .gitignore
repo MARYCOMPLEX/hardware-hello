@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+_site/
+examples/gpio-lab/build/
+examples/gpio-lab/sdkconfig
+examples/gpio-lab/sdkconfig.old

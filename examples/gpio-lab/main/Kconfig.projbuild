@@ -1,0 +1,10 @@
+menu "Hardware Hello lab"
+config HH_ENABLE_LED
+    bool "Enable external LED on a verified GPIO"
+    default n
+config HH_LED_GPIO
+    int "Verified LED GPIO number"
+    depends on HH_ENABLE_LED
+    range 0 48
+    default 2
+endmenu

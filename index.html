@@ -5,24 +5,29 @@
 <title>Hardware Hello · ESP32 学习书</title>
 <style>
 :root{--ink:#17211b;--muted:#68756c;--paper:#f4f0e6;--card:#fbfaf5;--line:#d8d5c9;--accent:#e25b37;--green:#1c6b58;--yellow:#e6b84a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Songti SC',serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(#6b715f .6px,transparent .6px);background-size:7px 7px}.shell{display:grid;grid-template-columns:300px minmax(0,860px);gap:48px;max-width:1260px;margin:auto;padding:40px 32px}.rail{position:sticky;top:28px;height:calc(100vh - 56px);display:flex;flex-direction:column}.eyebrow{font:700 12px/1.2 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}h1{font-size:52px;line-height:1.04;letter-spacing:-.05em;margin:14px 0 16px}h2{font-size:34px;line-height:1.15;margin:56px 0 18px;border-top:2px solid var(--ink);padding-top:15px}h3{font-size:24px;line-height:1.2;margin:32px 0 10px;color:var(--green)}p{font-size:17px;margin:12px 0}a{color:var(--green);text-decoration-thickness:2px;text-underline-offset:3px}.intro{font-size:19px;color:#405046}.meta{font:13px/1.5 ui-monospace,monospace;color:var(--muted);border-left:3px solid var(--yellow);padding-left:14px;margin:26px 0}.toc{margin-top:26px;overflow:auto;padding-right:12px}.toc a{display:block;padding:5px 0;text-decoration:none;color:var(--muted);font-size:14px}.toc a:hover{color:var(--accent);transform:translateX(4px)}.progress{margin-top:auto;font:12px ui-monospace,monospace;color:var(--muted)}.bar{height:6px;background:#dedbd0;margin-top:8px}.bar i{display:block;width:0;height:100%;background:var(--accent);transition:width .3s}.book{background:rgba(251,250,245,.6);padding:22px 48px 70px;border-left:1px solid var(--line);border-right:1px solid var(--line)}blockquote{border-left:5px solid var(--accent);margin:26px 0;padding:9px 20px;background:#efe9da;color:#4a554e}pre{overflow:auto;background:#18231f;color:#e9eadf;border-radius:5px;padding:18px 20px;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:5px 5px 0 #d2cdbd}code{font-family:ui-monospace,monospace;background:#e8e3d5;padding:2px 5px;border-radius:3px;font-size:.9em}pre code{background:none;padding:0}table{border-collapse:collapse;width:100%;margin:18px 0;background:var(--card);font-size:15px}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:#e7eee8;color:var(--green)}li{margin:5px 0}.chapter{scroll-margin-top:25px}.chapter:first-child h2{margin-top:20px}.note{background:#e2eee8;border:1px solid #bad0c1;padding:16px 20px;margin:22px 0}.exercise{background:#fff4d8;border:1px solid #e6cf8a;padding:16px 20px;margin:22px 0}.top{position:fixed;right:26px;bottom:25px;border:1px solid var(--ink);background:var(--card);padding:9px 12px;text-decoration:none;font:12px ui-monospace,monospace}@media(max-width:900px){.shell{display:block;padding:24px 16px}.rail{position:relative;top:auto;height:auto;padding-bottom:20px}.toc{max-height:180px}.book{padding:8px 18px 50px;border:0}h1{font-size:42px}h2{font-size:29px}}
+
+.book{min-width:0;overflow-wrap:anywhere}pre{overflow-wrap:normal}h1,h2,h3{scroll-margin-top:24px}.toc summary{cursor:pointer}.toc summary a{display:inline}.toc .toc-3{font-size:12px;padding-left:16px}.toc .toc-1{font-weight:bold;color:var(--green)}.table-wrap{overflow-x:auto}hr{border:0;border-top:1px solid var(--line);margin:36px 0}.toc a:focus-visible{outline:2px solid var(--accent)}
 </style></head>
-<body id="top"><div class="shell"><aside class="rail"><div><div class="eyebrow">A field guide / 01</div><h1>Hardware<br><span style="color:var(--accent)">Hello</span></h1><p class="intro">用 AI 学会 ESP32 多功能调试器</p><div class="meta">给软件工程师的嵌入式系统入门书<br>ESP-IDF · FreeRTOS · UART · SPI · I²C · SWD</div></div><nav class="toc"><a href="#hardware-hello" class="toc-1">Hardware Hello</a><a href="#用-ai-学会-esp32-多功能调试器" class="toc-2">用 AI 学会 ESP32 多功能调试器</a><a href="#读者说明你要学会的不是一块板子" class="toc-2">读者说明：你要学会的不是一块板子</a><a href="#第一篇建立嵌入式心智模型" class="toc-1">第一篇　建立嵌入式心智模型</a><a href="#第-1-章从软件服务到硬件系统" class="toc-2">第 1 章　从软件服务到硬件系统</a><a href="#第-2-章数字电路的最低必要知识" class="toc-2">第 2 章　数字电路的最低必要知识</a><a href="#第-3-章cfreertos-与并发" class="toc-2">第 3 章　C、FreeRTOS 与并发</a><a href="#第二篇esp-idf-工具链" class="toc-1">第二篇　ESP-IDF 工具链</a><a href="#第-4-章工程组件和构建系统" class="toc-2">第 4 章　工程、组件和构建系统</a><a href="#第-5-章烧录串口和日志" class="toc-2">第 5 章　烧录、串口和日志</a><a href="#第三篇总线与协议" class="toc-1">第三篇　总线与协议</a><a href="#第-6-章uart先让两块板说话" class="toc-2">第 6 章　UART：先让两块板说话</a><a href="#第-7-章i²c地址寄存器和探测" class="toc-2">第 7 章　I²C：地址、寄存器和探测</a><a href="#第-8-章spi采样与时序" class="toc-2">第 8 章　SPI、采样与时序</a><a href="#第四篇读懂这套项目" class="toc-1">第四篇　读懂这套项目</a><a href="#第-9-章linkit把多块板组织成系统" class="toc-2">第 9 章　LinkIt：把多块板组织成系统</a><a href="#第-10-章lvgl-与-ui" class="toc-2">第 10 章　LVGL 与 UI</a><a href="#第-11-章无线-cmsis-dap" class="toc-2">第 11 章　无线 CMSIS-DAP</a><a href="#第五篇用-ai-高效学习和调试" class="toc-1">第五篇　用 AI 高效学习和调试</a><a href="#第-12-章ai-结对编程协议" class="toc-2">第 12 章　AI 结对编程协议</a><a href="#第-13-章调试方法从症状到根因" class="toc-2">第 13 章　调试方法：从症状到根因</a><a href="#第六篇实践路线" class="toc-1">第六篇　实践路线</a><a href="#第-14-章四周入门计划" class="toc-2">第 14 章　四周入门计划</a><a href="#第-15-章从零采购与风险控制" class="toc-2">第 15 章　从零采购与风险控制</a><a href="#附录-a命令速查" class="toc-1">附录 A　命令速查</a><a href="#附录-b源码导航" class="toc-1">附录 B　源码导航</a><a href="#附录-c最终检查清单" class="toc-1">附录 C　最终检查清单</a></nav><div class="progress">阅读进度<div class="bar"><i id="progress"></i></div></div></aside><main class="book"><div class="book-content"><h1 id="hardware-hello">Hardware Hello</h1>
+<body id="top"><div class="shell"><aside class="rail"><div><div class="eyebrow">A field guide / 01</div><h1>Hardware<br><span style="color:var(--accent)">Hello</span></h1><p class="intro">用 AI 学会 ESP32 多功能调试器</p><div class="meta">给软件工程师的嵌入式系统入门书<br>ESP-IDF · FreeRTOS · UART · SPI · I²C · SWD</div></div><nav class="toc"><a href="#hardware-hello" class="toc-1">Hardware Hello</a><a href="#用-ai-学会-esp32-多功能调试器" class="toc-2">用 AI 学会 ESP32 多功能调试器</a><a href="#读者说明你要学会的不是一块板子" class="toc-2">读者说明：你要学会的不是一块板子</a><a href="#第一篇-建立嵌入式心智模型" class="toc-1">第一篇 建立嵌入式心智模型</a><details><summary><a href="#第-1-章-从软件服务到硬件系统" class="toc-2">第 1 章 从软件服务到硬件系统</a></summary><a href="#11-固件是什么" class="toc-3">1.1 固件是什么</a><a href="#12-硬件是运行时的一部分" class="toc-3">1.2 硬件是运行时的一部分</a><a href="#13-本项目的系统图" class="toc-3">1.3 本项目的系统图</a><a href="#ai-提问模板" class="toc-3">AI 提问模板</a><a href="#练习" class="toc-3">练习</a><a href="#14-一个读数从空气走到屏幕要经过什么" class="toc-3">1.4 一个读数从空气走到屏幕，要经过什么</a><a href="#15-mcu芯片模组开发板和成品板" class="toc-3">1.5 MCU、芯片、模组、开发板和成品板</a><a href="#16-芯片资源是设计约束" class="toc-3">1.6 芯片资源是设计约束</a><a href="#本章自测与答案" class="toc-3">本章自测与答案</a></details><details><summary><a href="#第-2-章-数字电路的最低必要知识" class="toc-2">第 2 章 数字电路的最低必要知识</a></summary><a href="#21-电压电流和电平" class="toc-3">2.1 电压、电流和电平</a><a href="#22-gpio-的四种常用角色" class="toc-3">2.2 GPIO 的四种常用角色</a><a href="#23-上拉与总线空闲态" class="toc-3">2.3 上拉与总线空闲态</a><a href="#24-共地" class="toc-3">2.4 共地</a><a href="#ai-提问模板_1" class="toc-3">AI 提问模板</a><a href="#练习_1" class="toc-3">练习</a><a href="#25-欧姆定律从公式算出一个-led-电阻" class="toc-3">2.5 欧姆定律：从公式算出一个 LED 电阻</a><a href="#26-串联并联和分压" class="toc-3">2.6 串联、并联和分压</a><a href="#27-输入为什么会悬空" class="toc-3">2.7 输入为什么会悬空</a><a href="#28-电容去耦和瞬态" class="toc-3">2.8 电容、去耦和瞬态</a><a href="#29-rc-时间常数与按钮抖动" class="toc-3">2.9 RC 时间常数与按钮抖动</a><a href="#本章实验点亮与读键" class="toc-3">本章实验：点亮与读键</a><a href="#210-电流究竟怎样流三个节点的完整推导" class="toc-3">2.10 电流究竟怎样流：三个节点的完整推导</a><a href="#211-电容与电感从公式理解瞬态" class="toc-3">2.11 电容与电感：从公式理解瞬态</a><a href="#212-公差与最坏情况一个-led-的完整选值" class="toc-3">2.12 公差与最坏情况：一个 LED 的完整选值</a></details><details><summary><a href="#第-3-章-cfreertos-与并发" class="toc-2">第 3 章 C、FreeRTOS 与并发</a></summary><a href="#31-app_main-不是普通-main" class="toc-3">3.1 app_main 不是普通 main</a><a href="#32-任务队列事件组" class="toc-3">3.2 任务、队列、事件组</a><a href="#33-资源意识" class="toc-3">3.3 资源意识</a><a href="#项目对应" class="toc-3">项目对应</a><a href="#ai-提问模板_2" class="toc-3">AI 提问模板</a><a href="#练习_2" class="toc-3">练习</a><a href="#34-c-语言中你必须读懂的几件事" class="toc-3">3.4 C 语言中你必须读懂的几件事</a><a href="#35-位运算与寄存器" class="toc-3">3.5 位运算与寄存器</a><a href="#36-为什么-volatile-不是锁" class="toc-3">3.6 为什么 volatile 不是锁</a><a href="#37-周期任务吞吐量和反压" class="toc-3">3.7 周期任务、吞吐量和反压</a><a href="#自测一帧热图的所有权" class="toc-3">自测：一帧热图的所有权</a><a href="#38-逐句读懂实验代码而不是复制运行" class="toc-3">3.8 逐句读懂实验代码，而不是复制运行</a><a href="#39-生产者与消费者为什么一个队列可以救活界面" class="toc-3">3.9 生产者与消费者：为什么一个队列可以救活界面</a></details><a href="#第二篇-esp-idf-工具链" class="toc-1">第二篇 ESP-IDF 工具链</a><details><summary><a href="#第-4-章-工程组件和构建系统" class="toc-2">第 4 章 工程、组件和构建系统</a></summary><a href="#41-工程目录" class="toc-3">4.1 工程目录</a><a href="#42-组件" class="toc-3">4.2 组件</a><a href="#43-配置" class="toc-3">4.3 配置</a><a href="#44-命令" class="toc-3">4.4 命令</a><a href="#常见错误" class="toc-3">常见错误</a><a href="#ai-提问模板_3" class="toc-3">AI 提问模板</a><a href="#练习_3" class="toc-3">练习</a><a href="#45-从空目录创建一个真实可构建的工程" class="toc-3">4.5 从空目录创建一个真实可构建的工程</a><a href="#46-看懂生成物" class="toc-3">4.6 看懂生成物</a><a href="#47-依赖版本与错误归类" class="toc-3">4.7 依赖版本与错误归类</a><a href="#48-第一个实验的逐步验收记录" class="toc-3">4.8 第一个实验的逐步验收记录</a></details><details><summary><a href="#第-5-章-烧录串口和日志" class="toc-2">第 5 章 烧录、串口和日志</a></summary><a href="#51-烧录是什么" class="toc-3">5.1 烧录是什么</a><a href="#52-日志是观测接口" class="toc-3">5.2 日志是观测接口</a><a href="#53-最小验证顺序" class="toc-3">5.3 最小验证顺序</a><a href="#54-usb-的三种用途不要混淆" class="toc-3">5.4 USB 的三种用途不要混淆</a><a href="#55-复位下载模式和启动引脚" class="toc-3">5.5 复位、下载模式和启动引脚</a><a href="#56-用复位日志建立证据链" class="toc-3">5.6 用复位日志建立证据链</a></details><a href="#第三篇-总线与协议" class="toc-1">第三篇 总线与协议</a><details><summary><a href="#第-6-章-uart先让两块板说话" class="toc-2">第 6 章 UART：先让两块板说话</a></summary><a href="#粘包与半包" class="toc-3">粘包与半包</a><a href="#练习_4" class="toc-3">练习</a><a href="#61-波特率不是有效字节率" class="toc-3">6.1 波特率不是有效字节率</a><a href="#62-一个最小两板实验" class="toc-3">6.2 一个最小两板实验</a><a href="#63-教学帧本书给出完整可运行解析器" class="toc-3">6.3 教学帧：本书给出完整可运行解析器</a><a href="#64-用定量目标验收" class="toc-3">6.4 用定量目标验收</a><a href="#65-按字节拆开-hh1-的一个真实例子" class="toc-3">6.5 按字节拆开 HH1 的一个真实例子</a><a href="#66-用故障注入理解测试的价值" class="toc-3">6.6 用故障注入理解测试的价值</a></details><details><summary><a href="#第-7-章-i²c地址寄存器和探测" class="toc-2">第 7 章 I²C：地址、寄存器和探测</a></summary><a href="#常见故障" class="toc-3">常见故障</a><a href="#ai-提问模板_4" class="toc-3">AI 提问模板</a><a href="#71-一次寄存器读取的完整时序" class="toc-3">7.1 一次寄存器读取的完整时序</a><a href="#72-上拉电阻为什么不能随便选" class="toc-3">7.2 上拉电阻为什么不能随便选</a><a href="#73-一个-esp-idf-55-新版-i²c-api-示例" class="toc-3">7.3 一个 ESP-IDF 5.5 新版 I²C API 示例</a><a href="#74-从原始数值到物理量" class="toc-3">7.4 从原始数值到物理量</a><a href="#75-从电平到寄存器完整看一次读芯片-id" class="toc-3">7.5 从电平到寄存器：完整看一次读芯片 ID</a><a href="#76-开漏时钟拉伸与上拉功耗" class="toc-3">7.6 开漏、时钟拉伸与上拉功耗</a></details><details><summary><a href="#第-8-章-spi采样与时序" class="toc-2">第 8 章 SPI、采样与时序</a></summary><a href="#练习_5" class="toc-3">练习</a><a href="#81-cpol-与-cpha" class="toc-3">8.1 CPOL 与 CPHA</a><a href="#82-从机与主机的流量关系" class="toc-3">8.2 从机与主机的流量关系</a><a href="#83-采样率采样深度捕获时间" class="toc-3">8.3 采样率、采样深度、捕获时间</a><a href="#84-用已知信号验证采集" class="toc-3">8.4 用已知信号验证采集</a></details><a href="#第四篇-读懂这套项目" class="toc-1">第四篇 读懂这套项目</a><details><summary><a href="#第-9-章-linkit把多块板组织成系统" class="toc-2">第 9 章 LinkIt：把多块板组织成系统</a></summary><a href="#状态机" class="toc-3">状态机</a><a href="#帧协议" class="toc-3">帧协议</a><a href="#阅读路径" class="toc-3">阅读路径</a><a href="#91-把握手当成分布式系统" class="toc-3">9.1 把握手当成分布式系统</a><a href="#92-有线切无线并非简单换个-send-函数" class="toc-3">9.2 有线切无线并非简单换个 send 函数</a><a href="#93-为什么不能直接发送-c-结构体" class="toc-3">9.3 为什么不能直接发送 C 结构体</a><a href="#94-一个源码取证案例gpio-注释冲突" class="toc-3">9.4 一个源码取证案例：GPIO 注释冲突</a></details><details><summary><a href="#第-10-章-lvgl-与-ui" class="toc-2">第 10 章 LVGL 与 UI</a></summary><a href="#ai-提问模板_5" class="toc-3">AI 提问模板</a><a href="#101-像素颜色与帧缓冲的成本" class="toc-3">10.1 像素、颜色与帧缓冲的成本</a><a href="#102-显示接口的引脚职责" class="toc-3">10.2 显示接口的引脚职责</a><a href="#103-lvgl-flush-与缓冲区生命周期" class="toc-3">10.3 LVGL flush 与缓冲区生命周期</a><a href="#104-触摸坐标标定" class="toc-3">10.4 触摸坐标标定</a></details><details><summary><a href="#第-11-章-无线-cmsis-dap" class="toc-2">第 11 章 无线 CMSIS-DAP</a></summary><a href="#111-usb-枚举到底在做什么" class="toc-3">11.1 USB 枚举到底在做什么</a><a href="#112-swdio-为什么需要切换方向" class="toc-3">11.2 SWDIO 为什么需要切换方向</a><a href="#113-分层验收无线调试器" class="toc-3">11.3 分层验收无线调试器</a></details><a href="#第五篇-用-ai-高效学习和调试" class="toc-1">第五篇 用 AI 高效学习和调试</a><details><summary><a href="#第-12-章-ai-结对编程协议" class="toc-2">第 12 章 AI 结对编程协议</a></summary><a href="#121-先给上下文再提问题" class="toc-3">12.1 先给上下文，再提问题</a><a href="#122-让-ai-读代码的顺序" class="toc-3">12.2 让 AI 读代码的顺序</a><a href="#123-防止-ai-猜硬件" class="toc-3">12.3 防止 AI 猜硬件</a><a href="#124-ai-生成代码的验收" class="toc-3">12.4 AI 生成代码的验收</a><a href="#125-一次有纪律的-ai-学习会话" class="toc-3">12.5 一次有纪律的 AI 学习会话</a><a href="#126-请求-ai-审查原理图的具体问题" class="toc-3">12.6 请求 AI 审查原理图的具体问题</a><a href="#127-把-ai-输出变成实验而不是权威" class="toc-3">12.7 把 AI 输出变成实验，而不是权威</a></details><details><summary><a href="#第-13-章-调试方法从症状到根因" class="toc-2">第 13 章 调试方法：从症状到根因</a></summary><a href="#131-分层定位" class="toc-3">13.1 分层定位</a><a href="#132-一张故障表" class="toc-3">13.2 一张故障表</a><a href="#133-记录实验" class="toc-3">13.3 记录实验</a><a href="#134-万用表四个档位怎么用" class="toc-3">13.4 万用表四个档位怎么用</a><a href="#135-示波器与逻辑分析仪分别回答什么" class="toc-3">13.5 示波器与逻辑分析仪分别回答什么</a><a href="#136-一张完整的排错记录" class="toc-3">13.6 一张完整的排错记录</a></details><a href="#第六篇-实践路线" class="toc-1">第六篇 实践路线</a><details><summary><a href="#第-14-章-四周入门计划" class="toc-2">第 14 章 四周入门计划</a></summary><a href="#第-1-周只做软件" class="toc-3">第 1 周：只做软件</a><a href="#第-2-周单板-gpio-与串口" class="toc-3">第 2 周：单板 GPIO 与串口</a><a href="#第-3-周总线和协议" class="toc-3">第 3 周：总线和协议</a><a href="#第-4-周系统化实践" class="toc-3">第 4 周：系统化实践</a><a href="#141-用验收关卡代替学过了" class="toc-3">14.1 用验收关卡代替“学过了”</a><a href="#142-一次完整模块实验的交付物" class="toc-3">14.2 一次完整模块实验的交付物</a></details><details><summary><a href="#第-15-章-从零采购与风险控制" class="toc-2">第 15 章 从零采购与风险控制</a></summary><a href="#复刻顺序" class="toc-3">复刻顺序</a><a href="#151-bom-应该怎样读" class="toc-3">15.1 BOM 应该怎样读</a><a href="#152-成本计算的正确单位" class="toc-3">15.2 成本计算的正确单位</a></details><a href="#第七篇-从电路原理到可制造的板子" class="toc-1">第七篇 从电路原理到可制造的板子</a><details><summary><a href="#第-16-章-读原理图把符号还原成电流和信号" class="toc-2">第 16 章 读原理图：把符号还原成电流和信号</a></summary><a href="#161-原理图和-pcb-分别是什么" class="toc-3">16.1 原理图和 PCB 分别是什么</a><a href="#162-一个教学原理图的逐线解释" class="toc-3">16.2 一个教学原理图的逐线解释</a><a href="#163-读图顺序" class="toc-3">16.3 读图顺序</a><a href="#164-用网络表和连通性对照代码" class="toc-3">16.4 用网络表和连通性对照代码</a><a href="#自测与答案" class="toc-3">自测与答案</a><a href="#165-怎样读一页芯片手册而不迷路" class="toc-3">16.5 怎样读一页芯片手册而不迷路</a><a href="#166-把软件宏还原成一张可审查的接线表" class="toc-3">16.6 把软件宏还原成一张可审查的接线表</a></details><details><summary><a href="#第-17-章-供电设计为什么软件一联网就重启" class="toc-2">第 17 章 供电设计：为什么软件一联网就重启</a></summary><a href="#171-平均电流峰值电流和余量" class="toc-3">17.1 平均电流、峰值电流和余量</a><a href="#172-ldo-与开关降压" class="toc-3">17.2 LDO 与开关降压</a><a href="#173-锂电池充电保护和电量计是不同模块" class="toc-3">17.3 锂电池、充电、保护和电量计是不同模块</a><a href="#174-首次上电步骤与停机条件" class="toc-3">17.4 首次上电步骤与停机条件</a></details><details><summary><a href="#第-18-章-输出驱动模拟输入与保护" class="toc-2">第 18 章 输出驱动、模拟输入与保护</a></summary><a href="#181-为什么马达不能直接接-gpio" class="toc-3">18.1 为什么马达不能直接接 GPIO</a><a href="#182-pwm-的平均值与瞬时值" class="toc-3">18.2 PWM 的平均值与瞬时值</a><a href="#183-adc量化校准与输入范围" class="toc-3">18.3 ADC、量化、校准与输入范围</a><a href="#184-功率计的分流电阻" class="toc-3">18.4 功率计的分流电阻</a></details><details><summary><a href="#第-19-章-usbpogo-与接口工程" class="toc-2">第 19 章 USB、pogo 与接口工程</a></summary><a href="#191-usb-c-的供电与数据" class="toc-3">19.1 USB-C 的供电与数据</a><a href="#192-pogo-的机械设计也是电气设计" class="toc-3">19.2 pogo 的机械设计也是电气设计</a><a href="#193-防反接防静电与电平转换" class="toc-3">19.3 防反接、防静电与电平转换</a><a href="#本章实验" class="toc-3">本章实验</a></details><details><summary><a href="#第-20-章-pcb-布局布线与制造检查" class="toc-2">第 20 章 PCB 布局布线与制造检查</a></summary><a href="#201-从网表到铜箔" class="toc-3">20.1 从网表到铜箔</a><a href="#202-一个供电回路的布局练习" class="toc-3">20.2 一个供电回路的布局练习</a><a href="#203-ercdrc-与功能正确性" class="toc-3">20.3 ERC、DRC 与功能正确性</a><a href="#204-投板文件与贴片文件" class="toc-3">20.4 投板文件与贴片文件</a><a href="#205-为调试设计测试点" class="toc-3">20.5 为调试设计测试点</a><a href="#206-一块双层教学小板的布局顺序" class="toc-3">20.6 一块双层教学小板的布局顺序</a><a href="#207-焊接与返修的最小知识" class="toc-3">20.7 焊接与返修的最小知识</a></details><details><summary><a href="#第-21-章-传感器数据为何需要算法和校准" class="toc-2">第 21 章 传感器数据为何需要算法和校准</a></summary><a href="#211-热成像不等于读取-768-个温度寄存器" class="toc-3">21.1 热成像不等于读取 768 个温度寄存器</a><a href="#212-发射率与颜色映射" class="toc-3">21.2 发射率与颜色映射</a><a href="#213-陀螺仪加速度计和磁力计" class="toc-3">21.3 陀螺仪、加速度计和磁力计</a><a href="#214-测量误差预算" class="toc-3">21.4 测量误差预算</a></details><details><summary><a href="#第-22-章-把原项目拆成五条完整实践链" class="toc-2">第 22 章 把原项目拆成五条完整实践链</a></summary><a href="#221-c6-屏幕主机" class="toc-3">22.1 C6 屏幕主机</a><a href="#222-esp32-s3-与-rp2040-逻辑分析模块" class="toc-3">22.2 ESP32-S3 与 RP2040 逻辑分析模块</a><a href="#223-热成像模块" class="toc-3">22.3 热成像模块</a><a href="#224-环境传感器模块" class="toc-3">22.4 环境传感器模块</a><a href="#225-c3-姿态模块与尚待核实部分" class="toc-3">22.5 C3 姿态模块与尚待核实部分</a></details><details><summary><a href="#第-23-章-综合设计题与详细参考答案" class="toc-2">第 23 章 综合设计题与详细参考答案</a></summary><a href="#231-题目设计一块温度显示从机" class="toc-3">23.1 题目：设计一块温度显示从机</a><a href="#232-参考设计调度与错误处理" class="toc-3">23.2 参考设计：调度与错误处理</a><a href="#233-参考设计带宽内存与测量" class="toc-3">23.3 参考设计：带宽、内存与测量</a><a href="#234-从温度从机迁移到原项目" class="toc-3">23.4 从温度从机迁移到原项目</a></details><details><summary><a href="#第-24-章-术语表与最终毕业检查" class="toc-2">第 24 章 术语表与最终毕业检查</a></summary><a href="#241-术语表" class="toc-3">24.1 术语表</a><a href="#242-毕业口试不看答案先回答" class="toc-3">24.2 毕业口试：不看答案先回答</a><a href="#243-参考答案与补课位置" class="toc-3">24.3 参考答案与补课位置</a></details><a href="#附录-a-命令速查" class="toc-1">附录 A 命令速查</a><a href="#附录-b-源码导航" class="toc-1">附录 B 源码导航</a><a href="#附录-c-最终检查清单" class="toc-1">附录 C 最终检查清单</a></nav><div class="progress">阅读进度<div class="bar"><i id="progress"></i></div></div></aside><main class="book"><div class="book-content"><h1 id="hardware-hello">Hardware Hello</h1>
 <h2 id="用-ai-学会-esp32-多功能调试器">用 AI 学会 ESP32 多功能调试器</h2>
-<blockquote>给软件工程师的嵌入式系统入门书</blockquote>
-<p><strong>版本</strong>：2026-09  </p>
+<blockquote>
+<p>给软件工程师的嵌入式系统入门书</p>
+</blockquote>
+<p><strong>版本</strong>：2026-09-29 教材扩展版</p>
 <p><strong>目标</strong>：从“会写软件”走到“能读懂、编译、烧录、调试一套多板硬件系统”。</p>
-<p>---</p>
+<hr />
 <h2 id="读者说明你要学会的不是一块板子">读者说明：你要学会的不是一块板子</h2>
 <p>这个项目由多个 ESP32 固件组成：ESP32-C6 负责屏幕和主机逻辑，ESP32-S3 负责逻辑分析、热成像、环境传感器和 CMSIS-DAP，另有 ESP32-C3 陀螺仪模块。它同时涉及 C、FreeRTOS、UART、SPI、I²C、USB、ESP-NOW、LVGL、协议设计和硬件调试。</p>
 <p>软件工程师的优势是抽象、分层、测试和版本控制。你的短板通常是电压、电平、时序、启动模式、芯片资源和“代码之外的一切”。本书把项目拆成可验证的小问题：先让一个 GPIO 工作，再理解一个总线，再理解一帧数据，最后理解整套系统。</p>
-<p>每章都有四个部分：概念、项目对应、AI 用法、练习。AI 是解释器、导航员和结对调试者；它不能替你测量电压，也不能替你确认一根线真的接到了正确的 GPIO。</p>
-<p>---</p>
-<h1 id="第一篇建立嵌入式心智模型">第一篇　建立嵌入式心智模型</h1>
-<h2 id="第-1-章从软件服务到硬件系统">第 1 章　从软件服务到硬件系统</h2>
+<p>本书先建立概念，再用计算、接线、代码、故障案例和带答案的练习形成闭环。AI 是解释器、导航员和结对调试者；它不能替你测量电压，也不能替你确认一根线真的接到了正确的 GPIO。</p>
+<hr />
+<h1 id="第一篇-建立嵌入式心智模型">第一篇　建立嵌入式心智模型</h1>
+<h2 id="第-1-章-从软件服务到硬件系统">第 1 章　从软件服务到硬件系统</h2>
 <h3 id="11-固件是什么">1.1 固件是什么</h3>
 <p>固件是运行在芯片上的程序。它没有操作系统提供的进程、文件系统和无限资源，而是直接管理 CPU、内存、GPIO、外设中断、无线电和电源状态。ESP-IDF 提供了启动代码、驱动、FreeRTOS、网络栈、构建系统和烧录工具。</p>
 <p>程序的生命周期大致是：</p>
-<pre><code>上电 → ROM 启动 → bootloader → 应用镜像 → app_main → 任务/中断/事件循环</code></pre>
+<pre><code class="language-text">上电 → ROM 启动 → bootloader → 应用镜像 → app_main → 任务/中断/事件循环
+</code></pre>
 <h3 id="12-硬件是运行时的一部分">1.2 硬件是运行时的一部分</h3>
 <p>在 Web 服务里，端口错了通常是配置问题；在硬件里，GPIO 错了可能导致无信号、短路或外设损坏。你需要同时维护三张表：</p>
 <ul>
@@ -31,7 +36,7 @@
 <li><strong>协议表</strong>：谁先发、帧长多少、校验怎么做、断线如何恢复。</li>
 </ul>
 <h3 id="13-本项目的系统图">1.3 本项目的系统图</h3>
-<pre><code>                 ┌──────────────┐
+<pre><code class="language-text">                 ┌──────────────┐
                  │ C6_Screen    │  主机 + LVGL
                  └──────┬───────┘
             LinkIt UART│DET / ESP-NOW
@@ -41,19 +46,35 @@
  采样/I²C/UART/SWD  MLX90640      BME280/BH1750/SGP40
        ▲
        │ ESP-NOW DAP
- S3_otg_cmsisdap ── USB OTG ── 电脑</code></pre>
+ S3_otg_cmsisdap ── USB OTG ── 电脑
+</code></pre>
 <h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>你是嵌入式导师。请只根据下面这段架构，解释每块板的职责、输入输出、
+<pre><code class="language-text">你是嵌入式导师。请只根据下面这段架构，解释每块板的职责、输入输出、
 依赖关系和最小可验证行为。不要猜测没有给出的器件型号。
-[粘贴 README 架构图]</code></pre>
+[粘贴 README 架构图]
+</code></pre>
 <h3 id="练习">练习</h3>
 <ol>
 <li>用一句话解释“主机”和“从机”。</li>
 <li>在纸上画出 C6 与一个 S3 模块的 TX/RX/GND。</li>
 <li>为每条连接标注“电气信号”和“协议含义”。</li>
 </ol>
-<p>---</p>
-<h2 id="第-2-章数字电路的最低必要知识">第 2 章　数字电路的最低必要知识</h2>
+<h3 id="14-一个读数从空气走到屏幕要经过什么">1.4 一个读数从空气走到屏幕，要经过什么</h3>
+<p>假设你希望屏幕每秒显示一次温度。传感器内部先把温度转成电信号，再通过内部转换电路变成数字；主控通过 I²C 取走寄存器里的整数；驱动按器件规则补偿、换算成摄氏度；应用封装成一帧；UART 把字节转成电压随时间的变化；C6 把电压变化解码为字节；协议层复原数据；UI 把数值画进缓冲区；SPI 最后把像素送给 LCD。</p>
+<p>每一层都可能正确，也都可能出错。屏幕显示 0 ℃不等于空气是 0 ℃：可能设备没响应，程序把默认零当成成功读数；也可能整数字节顺序错了；也可能 UI 没刷新。排查的办法是沿数据流找第一个偏离预期的边界。</p>
+<p>把每一层的输入、输出、单位写下来：寄存器是无符号整数，补偿后的值是摄氏度，网络帧可能使用“百分之一摄氏度”的整数，显示字符串是 <code>23.45 °C</code>。量纲和编码是接口契约。没有单位的 <code>value</code> 和没有有效标志的 <code>0</code> 都容易制造难以定位的错误。</p>
+<h3 id="15-mcu芯片模组开发板和成品板">1.5 MCU、芯片、模组、开发板和成品板</h3>
+<p>MCU 是微控制器，一颗芯片里包含 CPU、内存和外设控制器。ESP32-S3 是芯片系列；带屏蔽罩、天线或天线接口、Flash 等的组合可能是模组；有 USB、稳压、电源指示和排针的板子通常叫开发板。原项目是定制功能板，不等于随便一块 ESP32 开发板。</p>
+<p>“同为 ESP32-S3”只保证部分架构相同，并不保证 Flash、PSRAM、引出的 GPIO、USB 接口或供电路径相同。软件类比是：两台服务器都采用同一种 CPU，不代表网卡、磁盘和 BIOS 配置一样。</p>
+<p>初学阶段使用开发板的价值，是把晶振、射频、Flash 和启动电路先交给已验证的板子。你能把注意力放在 GPIO 和协议上。等开发板实验通过，再把这些已理解的功能搬回定制 PCB。</p>
+<h3 id="16-芯片资源是设计约束">1.6 芯片资源是设计约束</h3>
+<p>ESP32-S3 使用 Xtensa 架构，通常可以运行双核任务；C3、C6 使用 RISC-V 架构，应用核和外设资源不同。编译目标错了，不是“换一个串口”能解决的问题。C6 的 USB Serial/JTAG 功能也不等同于 S3 的通用 USB OTG 外设，不能据此认为 C6 可以直接运行 S3 的 CherryUSB 调试器工程。</p>
+<p>CPU 负责执行代码，Flash 长期保存固件，RAM 保存运行中数据。PSRAM 是扩展 RAM，容量大但访问性质、DMA 使用限制与内部 RAM 不同；它的信号线还可能占用你想接外设的引脚。选型时需要同时看容量和引脚，而不是只挑最大容量。</p>
+<h3 id="本章自测与答案">本章自测与答案</h3>
+<p>问题：固件成功编译，能证明热成像硬件正常吗？答案：只能证明当前源码在当前工具链下满足编译、链接约束；没有验证供电、接线、传感器通信、测量精度或 UI 行为。</p>
+<p>问题：温度一直为零，你应先改 UI 还是先观察传感器读数？答案：先记录驱动返回码、原始寄存器、换算值，再沿协议和 UI 逐段查；这样可以确定错误发生在哪一层。</p>
+<hr />
+<h2 id="第-2-章-数字电路的最低必要知识">第 2 章　数字电路的最低必要知识</h2>
 <h3 id="21-电压电流和电平">2.1 电压、电流和电平</h3>
 <p>ESP32 通常使用 3.3 V 逻辑。<code>HIGH</code> 和 <code>LOW</code> 是电压范围，不是抽象布尔值。两个模块通信前要确认：供电电压、IO 电平、最大电流、是否需要上拉、是否允许 5 V 信号进入 3.3 V GPIO。</p>
 <h3 id="22-gpio-的四种常用角色">2.2 GPIO 的四种常用角色</h3>
@@ -67,19 +88,56 @@
 <p>I²C 的 SDA/SCL 是开漏结构，设备只能主动拉低，需要电阻把总线拉高。UART 是推挽信号，TX 空闲通常为高。DET 线则是项目自定义的检测信号，必须按板级定义理解。</p>
 <h3 id="24-共地">2.4 共地</h3>
 <p>没有共同参考地，逻辑高低没有共同基准。跨板 UART、SPI、SWD 都要先接 GND，再接信号线。</p>
-<h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>请把 GPIO、UART、SPI、I²C、SWD 的电气行为分别用“谁驱动、谁采样、
-空闲态、时钟来源、常见故障”五列解释，并指出哪些问题只能用万用表或示波器确认。</code></pre>
-<h3 id="练习">练习</h3>
+<h3 id="ai-提问模板_1">AI 提问模板</h3>
+<pre><code class="language-text">请把 GPIO、UART、SPI、I²C、SWD 的电气行为分别用“谁驱动、谁采样、
+空闲态、时钟来源、常见故障”五列解释，并指出哪些问题只能用万用表或示波器确认。
+</code></pre>
+<h3 id="练习_1">练习</h3>
 <p>用万用表测量开发板 3V3、GND 和一个 GPIO，写下空闲电压；不要在不确定电压时连接外部模块。</p>
-<p>---</p>
-<h2 id="第-3-章cfreertos-与并发">第 3 章　C、FreeRTOS 与并发</h2>
+<h3 id="25-欧姆定律从公式算出一个-led-电阻">2.5 欧姆定律：从公式算出一个 LED 电阻</h3>
+<p>电压 V 是两点之间的电势差，电流 I 是单位时间内流过的电荷，电阻 R 阻碍电流。直流电阻近似满足 <code>V = I × R</code>。单位分别是伏特 V、安培 A、欧姆 Ω。<code>1 mA = 0.001 A</code>，<code>1 kΩ = 1000 Ω</code>。功率 <code>P = V × I = I² × R</code>，单位瓦特 W。</p>
+<p>教学电路：3.3 V GPIO 输出 → 电阻 → 红色 LED 阳极 → LED 阴极 → GND。假设 LED 正向压降为 2.0 V，希望流过 3 mA，则电阻承担 1.3 V，<code>R = 1.3 / 0.003 ≈ 433 Ω</code>。选常用 470 Ω 后电流约 2.8 mA，电阻功率约 0.0036 W。这里的 2.0 V 是教学假设，不是所有 LED 的固定参数；蓝色、白色 LED 的压降通常更高。</p>
+<p>限流电阻不是为了“降低 GPIO 的逻辑电平”，而是控制通过 LED 的电流。直接接 LED 没有合理限流，电流由非线性的 LED 特性和 GPIO 输出阻抗共同决定，可能损坏器件。LED 长脚常为阳极，但裁剪过的引脚不可靠，应以器件标记或万用表二极管档确认。</p>
+<h3 id="26-串联并联和分压">2.6 串联、并联和分压</h3>
+<p>电阻串联时电流相同，总阻值相加。并联时电压相同，电流分流，<code>1/R总 = 1/R1 + 1/R2</code>。两个 4.7 kΩ 上拉并联后只有 2.35 kΩ；多个模块自带上拉时不能只看单块板。</p>
+<p>分压电路是：输入电压 → R上 → 测量节点 → R下 → GND。节点电压近似 <code>Vout = Vin × R下 / (R上 + R下)</code>，前提是测量端输入阻抗足够高。用两个 10 kΩ 把 5 V 分成 2.5 V 时，总电流 0.25 mA；如果负载也接了一个 10 kΩ 到地，下支路变成 5 kΩ，输出就降到约 1.67 V。因此分压适合某些高阻测量输入，不适合给 MCU 供电。</p>
+<h3 id="27-输入为什么会悬空">2.7 输入为什么会悬空</h3>
+<p>数字输入的输入阻抗很高，不接东西时不保证为零。周围电场、漏电、探头接触都可能让它变动。上拉把输入轻轻拉向 3.3 V，下拉把输入拉向 GND；“轻轻”指通过电阻，而不是直接短接。</p>
+<p>按键实验采用上拉：GPIO 节点通过 10 kΩ 接 3.3 V，按键另一端接地。松开时读 1，按下时读 0。按下电流约 <code>3.3/10000 = 0.33 mA</code>。这叫低有效：软件中的“按下”与电平 0 对应，而不是 1。</p>
+<p>一个输出引脚被设置为高，另一个输出被设置为低，如果直接接在一起，就形成输出冲突。TX 对 TX、错误配置的 SWDIO、双方都推挽驱动的 DET 都可能产生这种问题。布线表必须写方向，而不仅写名字。</p>
+<h3 id="28-电容去耦和瞬态">2.8 电容、去耦和瞬态</h3>
+<p>电容储存电荷，<code>Q = C × V</code>；瞬态关系可写为 <code>I = C × ΔV / Δt</code>。例如希望 100 mA 的电流突变持续 10 µs 时电压只下降 0.1 V，理想估算需要 <code>C = 0.1 × 10 µs / 0.1 = 10 µF</code>。真实电容还有等效串联电阻、寄生电感和直流偏压降容，算出的值只是起点。</p>
+<p>小容量去耦电容靠近芯片供电脚，提供短路径的高频电流；较大容量电容缓冲较慢变化。电源“平均电流够用”并不代表 Wi-Fi 发射瞬间不会掉压。布局距离也重要：电容离芯片很远，走线电感会削弱作用。</p>
+<p>电容并联可以相加，但不能用“电容越多越好”代替设计；部分稳压器要求特定输出电容范围及 ESR，过大的输入电容还可能增加插入浪涌。</p>
+<h3 id="29-rc-时间常数与按钮抖动">2.9 RC 时间常数与按钮抖动</h3>
+<p>电阻通过电容充电时，电压不会立即跳变。时间常数 <code>τ = R × C</code>。例如 10 kΩ 与 100 nF 得到 1 ms；经过一个时间常数，理想充电电压达到最终值约 63%，约五个时间常数达到 99% 左右。</p>
+<p>机械按键会在几毫秒内反复接通、断开。最容易理解的软件消抖法是每 5 ms 采样一次，连续 4 次一致后才承认新状态，得到大约 20 ms 的稳定窗口。别把每个边沿都当成一次点击。RC 可以缓解抖动，但仍要考虑输入阈值与施密特触发特性。</p>
+<h3 id="本章实验点亮与读键">本章实验：点亮与读键</h3>
+<p>材料是确认支持 3.3 V IO 的开发板、470 Ω 电阻、红色 LED、10 kΩ 电阻、按键和导线。断电接线；选择没有被 Flash、PSRAM、USB、启动配置占用且已引出的 GPIO。先只做 LED，再只做按键，最后组合成“按下亮、松开灭”。</p>
+<p>预期结果：LED 电阻两端电压约为供电减去 LED 压降；按键输入松开接近 3.3 V、按下接近 0 V。如果 LED 不亮，先测 GPIO 是否翻转，再看方向和电阻；如果按键乱跳，先看共地、上拉和消抖，不要立刻改中断优先级。</p>
+<p>计算题：3.3 V、LED 压降 1.9 V、目标 2 mA，电阻多少？答案：700 Ω，选择附近标准值并重新计算电流；例如 750 Ω 时约 1.87 mA。没有唯一神奇的标准值，关键是控制电流且满足 GPIO 与器件额定值。</p>
+<hr />
+<h3 id="210-电流究竟怎样流三个节点的完整推导">2.10 电流究竟怎样流：三个节点的完整推导</h3>
+<p>分析电路时先选参考地为 0 V，然后给每个节点标电压。电压是两个节点之间的差，不是某根线中“装着多少电”。同一个电路里，两个都标为 3.3 V 的节点之间理想电压差为零；电流大小由完整回路中的器件决定。只有电源正端接负载、负载接回负端，才形成持续直流回路。</p>
+<p>两个基础定律足够分析很多入门电路。基尔霍夫电流定律说：一个节点流入电流的总和等于流出总和，电荷不会无限堆积。基尔霍夫电压定律说：沿闭合回路各段电压升降的代数和为零。串联电阻电流相同，并联支路电压相同，都是这两个定律的结果。</p>
+<p>以 3.3 V 电源、10 kΩ 上电阻、20 kΩ 下电阻组成的分压为例：总电阻 30 kΩ，电流为 110 µA，上电阻压降 1.1 V，下电阻压降 2.2 V，中点相对地就是 2.2 V。若误把一个 10 kΩ 负载接在中点到地，它与下电阻并联，等效为 <code>(20×10)/(20+10)=6.67 kΩ</code>，中点变为 <code>3.3×6.67/(10+6.67)≈1.32 V</code>。所以“公式算出 2.2 V”只适用于原先假定的负载；接入测量设备也可能改变被测对象。</p>
+<p>数字输入常呈高阻，因此上拉能用较小电流保持电平；输出则主动供电或吸电流。把两个推挽输出相连，如果一个输出高、另一个低，就可能形成供电到地的大电流路径。总线上允许多设备共线，需要协议仲裁和匹配的电气驱动方式，绝不是把任意输出并起来。</p>
+<h3 id="211-电容与电感从公式理解瞬态">2.11 电容与电感：从公式理解瞬态</h3>
+<p>电容的关系是 <code>I=C×dV/dt</code>。它抵抗电压的突变：改变电压需要移动电荷。在直流稳定后，理想电容不再持续导通；在刚上电或负载快速变化时，它却会明显影响电流。真实电容还包含等效串联电阻 ESR、寄生电感以及容量误差。</p>
+<p>假设负载突然额外消耗 100 mA，而电源要 10 µs 才补上，允许电压只下降 0.1 V。按 <code>C=I×Δt/ΔV</code> 算出至少 10 µF。这只覆盖理想电荷需求；若 ESR 为 0.2 Ω，电流阶跃还会瞬间引入 <code>0.1×0.2=20 mV</code> 的压降。由此能理解为什么既放储能电容，也放贴近芯片的小去耦电容。电容标称 10 µF 并不保证在实际直流偏压下仍有 10 µF。</p>
+<p>电感关系是 <code>V=L×dI/dt</code>，它抵抗电流突变。马达线圈断电时仍试图保持原电流，所以电压可能升高到足以损伤开关；续流路径为这股电流提供衰减的回路。电容储能为 <code>C×V²/2</code>，电感储能为 <code>L×I²/2</code>。这些公式解释现象，而实际器件选择还需检查耐压、温升和额定条件。</p>
+<h3 id="212-公差与最坏情况一个-led-的完整选值">2.12 公差与最坏情况：一个 LED 的完整选值</h3>
+<p>假设教学红色 LED 的正向压降在 1.8～2.2 V，电源在 3.2～3.4 V，选 470 Ω、±5% 电阻。最大电流发生在电源最高、LED 压降最低、电阻最小：<code>(3.4−1.8)/(470×0.95)=3.58 mA</code>。最小电流为 <code>(3.2−2.2)/(470×1.05)=2.03 mA</code>。这比单算典型值更接近真实设计。</p>
+<p>电阻最坏功耗约 <code>1.6²/446.5=5.7 mW</code>。常见额定功率高于它，但还要确认封装、温度降额以及 LED 和 GPIO 允许电流。GPIO 输出高电压也会随负载变化，因此上述计算是先用电源电压估算上界，并不是芯片输出精度保证。</p>
+<p>自测：把 470 Ω 改为 47 Ω，亮度是否只变十倍而其他不变？答案：电流会明显增加，LED 压降、GPIO 压降与温升也改变，可能超过引脚能力；不能把器件当作永远线性的理想模型。</p>
+<h2 id="第-3-章-cfreertos-与并发">第 3 章　C、FreeRTOS 与并发</h2>
 <h3 id="31-app_main-不是普通-main">3.1 <code>app_main</code> 不是普通 <code>main</code></h3>
 <p>ESP-IDF 启动后调用 <code>app_main</code>。它通常负责初始化驱动、创建任务和启动服务，然后由 FreeRTOS 调度多个任务。</p>
-<pre><code>void app_main(void) {
+<pre><code class="language-c">void app_main(void) {
     init_board();
     xTaskCreate(sensor_task, &quot;sensor&quot;, 4096, NULL, 5, NULL);
-}</code></pre>
+}
+</code></pre>
 <h3 id="32-任务队列事件组">3.2 任务、队列、事件组</h3>
 <ul>
 <li><strong>任务</strong>：长期运行的独立执行单元；</li>
@@ -92,36 +150,65 @@
 <p>ESP32 的栈和堆是有限的。日志格式化、大数组、LVGL 缓冲区、无线缓存和传感器帧都会消耗内存。每个任务都应能回答：栈多大、运行在哪个核、优先级是多少、谁会阻塞它。</p>
 <h3 id="项目对应">项目对应</h3>
 <p><code>S3_LogicAnalyser</code> 把逻辑采集、UART/I²C sniff、SWD 接收拆成不同职责；<code>S3_otg_cmsisdap</code> 把 USB、屏幕、触摸和无线传输组合起来。阅读源码时先画任务图，再看函数细节。</p>
-<h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>下面是一个 FreeRTOS 任务函数。请标出所有阻塞点、共享资源、可能的竞态、
-栈风险和看门狗风险，并给出最小修复方案。不要重写无关代码。</code></pre>
-<h3 id="练习">练习</h3>
-<p>把 <code>examples/hello_gpio.c</code> 改成一个任务驱动的 LED，并加入一个按键事件队列。</p>
-<p>---</p>
-<h1 id="第二篇esp-idf-工具链">第二篇　ESP-IDF 工具链</h1>
-<h2 id="第-4-章工程组件和构建系统">第 4 章　工程、组件和构建系统</h2>
+<h3 id="ai-提问模板_2">AI 提问模板</h3>
+<pre><code class="language-text">下面是一个 FreeRTOS 任务函数。请标出所有阻塞点、共享资源、可能的竞态、
+栈风险和看门狗风险，并给出最小修复方案。不要重写无关代码。
+</code></pre>
+<h3 id="练习_2">练习</h3>
+<p>先运行 <code>examples/gpio-lab/</code> 的日志实验，核实 LED 引脚后启用 LED，再增加一个按键事件队列。</p>
+<h3 id="34-c-语言中你必须读懂的几件事">3.4 C 语言中你必须读懂的几件事</h3>
+<p><code>uint8_t</code> 表示 8 位无符号整数，范围 0～255；<code>uint16_t</code> 范围 0～65535。<code>int16_t</code> 可表示负数，常用于有符号传感器数据。<code>size_t</code> 表示对象大小，其位宽随目标变化。使用固定宽度类型可以明确协议字段大小，但不能单靠它解决结构体填充和端序。</p>
+<p>指针是地址，不自动携带长度。<code>void parse(const uint8_t *data, size_t len)</code> 的调用者必须保证 <code>data</code> 指向至少 <code>len</code> 字节的有效区域。指针非空只代表不是空地址，不代表长度足够。访问 <code>data[5]</code> 前至少要检查 <code>len &gt;= 6</code>。</p>
+<p>局部数组默认在栈上，函数返回后其生命周期结束。不要把局部数组地址传给稍后才执行的 DMA 或队列消费者。如果队列存的是指针，入队只复制指针；如果队列元素是整个结构体，FreeRTOS 队列通常复制结构体内容。明确缓冲区谁分配、谁拥有、何时可覆盖、谁释放，是驱动开发的基础。</p>
+<h3 id="35-位运算与寄存器">3.5 位运算与寄存器</h3>
+<p>寄存器是硬件暴露的配置或状态位。假设一个 8 位寄存器 bit2 控制启动，bit0 表示忙：设置 bit2 是 <code>value |= (1u &lt;&lt; 2)</code>，清除 bit2 是 <code>value &amp;= ~(1u &lt;&lt; 2)</code>，检测忙是 <code>(value &amp; 1u) != 0</code>。</p>
+<p>但不是所有寄存器都能“读、改、写”。有些状态位写 1 清除，有些读出即清除，有些保留位必须保持规定值。寄存器表中的 RW、RO、W1C 分别表示读写、只读、写 1 清除。AI 看到一个地址并不能自动知道它的语义。</p>
+<h3 id="36-为什么-volatile-不是锁">3.6 为什么 <code>volatile</code> 不是锁</h3>
+<p><code>volatile</code> 告诉编译器每次按规则访问对象，不把访问随意优化掉；它不保证复合操作原子性，不负责线程间完整同步，也不保护多个字段的一致性。两个任务同时执行 <code>counter++</code> 可能丢失更新，因为读、加、写是分开的动作。</p>
+<p>更稳妥的设计是只让一个任务拥有设备状态，其他任务用队列发送请求。确实需要共享时，使用互斥锁或适合中断的临界区。中断里不使用会阻塞的普通锁，FreeRTOS 的中断调用使用相应 <code>FromISR</code> API，并按需要请求调度。</p>
+<h3 id="37-周期任务吞吐量和反压">3.7 周期任务、吞吐量和反压</h3>
+<p><code>vTaskDelay(100ms)</code> 表示从调用时起等待，因此采集耗时会累加到周期中；固定节拍可用 <code>vTaskDelayUntil</code>。若采集花 20 ms，再延迟 100 ms，周期大约 120 ms，而不是 100 ms。</p>
+<p>生产者每秒产生 100 帧，消费者每秒只能处理 80 帧，队列最终一定填满；加大队列只能延后失败。温度 UI 可以丢弃旧数据只保留最新值，逻辑采样则应停止采集或报告溢出，因为漏掉一个边沿可能改变协议解释。这叫按业务语义设计反压。</p>
+<p>ESP-IDF 任务栈参数按其 API 定义使用，常见 IDF 任务创建接口的栈深度以字节计，与上游 FreeRTOS 某些文档中的“字”不同。不要复制一个数字而不确认单位。监测栈水位、堆剩余和最大连续空闲块，能区别总内存不足与碎片化。</p>
+<h3 id="自测一帧热图的所有权">自测：一帧热图的所有权</h3>
+<p>采集任务在数组 A 中不断写像素，UI 同时读 A，画面偶尔断裂。正确答案不是把 A 标成 volatile，而是约定所有权：使用两个缓冲区，采集填充后通过队列交给 UI，UI 完成后归还；或者在锁保护下复制出一帧。锁不能长时间覆盖整个慢速 I²C 读取，否则会阻塞 UI。</p>
+<hr />
+<h3 id="38-逐句读懂实验代码而不是复制运行">3.8 逐句读懂实验代码，而不是复制运行</h3>
+<p><code>#include</code> 把声明引入当前编译单元；它不直接把函数实现复制进来。<code>gpio_set_level</code> 的声明来自头文件，实现来自链接进去的驱动组件。找不到头文件与链接时找不到实现是两种不同错误，所以 <code>main/CMakeLists.txt</code> 的 <code>REQUIRES esp_driver_gpio</code> 也属于实验的一部分。</p>
+<p><code>uint32_t count=0</code> 表示宽度明确的无符号 32 位整数，其加法溢出按模 2³² 回绕。日志使用 <code>PRIu32</code> 让格式字符串匹配平台定义；不要假设所有编译器的 <code>long</code> 都是同样宽度。局部变量放在哪种存储区取决于声明方式和编译优化，但本实验循环持续运行，其计数变量在任务执行中保持有效。</p>
+<p><code>#if CONFIG_HH_ENABLE_LED</code> 是编译期条件。关闭选项后，LED 初始化和写引脚代码不参与编译；它不是运行时 <code>if</code>，因此关闭时不要求定义一个有效 LED 引脚。<code>1ULL &lt;&lt; pin</code> 生成 64 位引脚位掩码，第 pin 位为 1。若使用普通 <code>1 &lt;&lt; pin</code>，在较大的 pin 编号处可能超出普通整数宽度。</p>
+<p><code>ESP_ERROR_CHECK</code> 遇到非成功结果时打印错误并终止当前正常运行流程，通常触发 panic/重启，适合暴露初始化错误。生产设备处理可恢复错误时应写分支、记录状态并重试，而不是对每次断连都重启。</p>
+<p><code>vTaskDelay(pdMS_TO_TICKS(1000))</code> 让当前任务阻塞约一秒，让其他任务和空闲任务获得运行机会；它不是把 CPU 忙等一秒。由于任务调度和循环执行时间，日志间隔不是精密时钟。周期性采样若要求避免累积漂移，应学习绝对唤醒时刻调度；更严格的波形则交给硬件定时器外设。</p>
+<h3 id="39-生产者与消费者为什么一个队列可以救活界面">3.9 生产者与消费者：为什么一个队列可以救活界面</h3>
+<p>设采样任务每 100 ms 生成一条温度，绘图偶尔占用 250 ms。如果采样直接调用绘图，它的采样间隔就随界面工作量改变。将采样值连同时间戳放入队列，显示任务独立取出，两个任务就解耦了。但是队列不是无限仓库：生产长期快于消费时，任何有限队列都会装满。</p>
+<p>设计时明确数据语义。温度仪表通常只关心最新值，可使用长度 1 的覆盖队列；逻辑分析仪必须保留每个样本，应降低采样率、提高消费吞吐量，或明确报告丢样。把两种场景都写成“队列满就等”可能让采集停止，也可能让 UI 卡住。</p>
+<p>队列传递结构体副本和传递指针不是一回事。若传递指向栈内数组的指针，函数返回后数据可能已无效；若传递 DMA 缓冲指针，生产者在消费者完成前重用它，显示就可能撕裂。需要约定所有权：谁分配、何时交接、谁释放、何时允许重写。软件工程师可以把它类比为没有垃圾回收器替你兜底的异步消息系统。</p>
+<h1 id="第二篇-esp-idf-工具链">第二篇　ESP-IDF 工具链</h1>
+<h2 id="第-4-章-工程组件和构建系统">第 4 章　工程、组件和构建系统</h2>
 <h3 id="41-工程目录">4.1 工程目录</h3>
 <p>ESP-IDF 工程最小结构：</p>
-<pre><code>project/
+<pre><code class="language-text">project/
 ├── CMakeLists.txt
 ├── sdkconfig.defaults
 ├── main/
 │   ├── CMakeLists.txt
 │   └── main.c
-└── components/</code></pre>
+└── components/
+</code></pre>
 <p>本项目还使用 <code>shared/</code>，各工程通过 <code>EXTRA_COMPONENT_DIRS</code> 引用共享协议和驱动。</p>
 <h3 id="42-组件">4.2 组件</h3>
 <p>组件是可复用的编译单元。<code>main/CMakeLists.txt</code> 中的 <code>REQUIRES</code> 描述依赖，组件自己的头文件和实现则封装内部细节。把协议、设备驱动和 UI 分成组件，能让同一套 LinkIt 逻辑服务多块板。</p>
 <h3 id="43-配置">4.3 配置</h3>
 <p><code>sdkconfig</code> 是具体构建配置，<code>sdkconfig.defaults</code> 是可复现的默认值。芯片目标和 Flash 容量必须匹配真实硬件：项目中 C6、S3、C3 的目标不同，S3 板还分别使用 2 MB 和 16 MB Flash 配置。</p>
 <h3 id="44-命令">4.4 命令</h3>
-<pre><code># 安装并加载 ESP-IDF 5.5.x
+<pre><code class="language-bash"># 安装并加载 ESP-IDF 5.5.x
 source ~/esp/esp-idf/export.sh
 
 cd C6_Screen
 idf.py set-target esp32c6
 idf.py build
-idf.py -p /dev/cu.usbmodemXXXX flash monitor</code></pre>
+idf.py -p /dev/cu.usbmodemXXXX flash monitor
+</code></pre>
 <p>每个子目录都是独立工程，不能从仓库根目录盲目执行 <code>idf.py build</code>。</p>
 <h3 id="常见错误">常见错误</h3>
 <ul>
@@ -131,21 +218,56 @@ idf.py -p /dev/cu.usbmodemXXXX flash monitor</code></pre>
 <li>Flash header 与芯片不符：检查 <code>sdkconfig.defaults</code>；</li>
 <li>端口被占用：关闭其他串口监视器。</li>
 </ul>
-<h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>这是 ESP-IDF 的完整构建错误。请按“第一条根因、证据、最小修复、验证命令”输出，
+<h3 id="ai-提问模板_3">AI 提问模板</h3>
+<pre><code class="language-text">这是 ESP-IDF 的完整构建错误。请按“第一条根因、证据、最小修复、验证命令”输出，
 不要把后续连锁错误当成独立问题。
-[粘贴错误]</code></pre>
-<h3 id="练习">练习</h3>
+[粘贴错误]
+</code></pre>
+<h3 id="练习_3">练习</h3>
 <p>只编译 <code>S3_Thermal</code>，不烧录。记录 IDF 版本、目标芯片、生成的 bin 文件和 Flash 配置。</p>
-<p>---</p>
-<h2 id="第-5-章烧录串口和日志">第 5 章　烧录、串口和日志</h2>
+<h3 id="45-从空目录创建一个真实可构建的工程">4.5 从空目录创建一个真实可构建的工程</h3>
+<p>安装 ESP-IDF 的完整过程包括 Git、Python 环境、CMake/Ninja 和目标编译器。在 macOS 上先安装命令行开发工具；如果系统已有这些工具，就不重复安装。安装目录仅为本书约定，可以换成自己的路径。</p>
+<pre><code class="language-bash">xcode-select --install
+mkdir -p ~/esp
+cd ~/esp
+git clone --branch v5.5.4 --recursive https://github.com/espressif/esp-idf.git
+cd esp-idf
+./install.sh esp32s3,esp32c6,esp32c3
+. ./export.sh
+idf.py --version
+</code></pre>
+<p><code>install.sh</code> 下载工具链和 Python 依赖；<code>export.sh</code> 修改当前终端的环境变量。新开终端需要再次加载。Windows 可使用官方安装器配置同一版 IDF，然后在其提供的终端运行 <code>idf.py</code>；本书 Shell 命令采用 macOS/Linux 语法。</p>
+<p>仓库的 <code>examples/gpio-lab/</code> 是独立 IDF 工程，顶层 CMake 引入 IDF 构建入口；<code>main/CMakeLists.txt</code> 注册源码；代码运行后每秒输出一个计数。LED 引脚默认禁用，因此没有 LED 或尚未核实引脚的读者也可以先验证串口。</p>
+<pre><code class="language-bash">cd examples/gpio-lab
+. ~/esp/esp-idf/export.sh
+idf.py set-target esp32s3
+idf.py build
+idf.py -p PORT flash monitor
+</code></pre>
+<p>把 <code>PORT</code> 替换为真实串口，例如 <code>/dev/cu.usbmodem...</code>，它不是固定文件名。运行 <code>ls /dev/cu.*</code>，插拔设备前后比较可发现新端口。Windows 常见为 <code>COM5</code> 一类端口名。退出 IDF monitor 通常用 Ctrl+]。</p>
+<h3 id="46-看懂生成物">4.6 看懂生成物</h3>
+<p>编译把 C 源码转成目标文件；链接把目标文件、库和符号地址组合成 ELF；打包生成应用 BIN。ELF 带符号信息，可用于回溯定位；BIN 是烧录镜像。应用还需要配套 bootloader 和分区表，不能只凭文件名猜测烧录偏移。</p>
+<p>分区表描述 Flash 的用途，例如 NVS 保存键值配置，应用分区保存固件，OTA 可使用多个应用槽位。运行时堆空间不足不会因为把 Flash 从 2 MB 改成 16 MB 就自动消失：Flash 和 RAM 是不同资源。</p>
+<p>复现实验记录至少包括 <code>idf.py --version</code>、源码提交号、目标芯片、完整 <code>sdkconfig</code>、编译输出和串口日志。只保存 <code>.c</code> 文件不足以复现同一行为。</p>
+<h3 id="47-依赖版本与错误归类">4.7 依赖版本与错误归类</h3>
+<p><code>idf_component.yml</code> 指明组件管理器需要下载的包；<code>^8.3.0</code> 是版本约束，不是永远固定在 8.3.0。将实际解析出的依赖锁文件纳入自己的项目管理，可避免未来下载到不同版本产生行为差异。</p>
+<p>本项目根 README 标注 IDF 5.5.4，部分旧文件标注 5.5.3；本书先以 5.5.4 作为复现基线，不能由依赖清单里宽泛的 <code>&gt;=4.1.0</code> 推出整个项目兼容 IDF 4.1。</p>
+<p>下载失败属于环境或网络层，缺头文件属于组件依赖层，未定义符号属于链接层，启动后重启属于运行时层。把第一条实质错误和前后上下文一起交给 AI，通常比只贴最后一句 <code>build failed</code> 更有效。</p>
+<hr />
+<h3 id="48-第一个实验的逐步验收记录">4.8 第一个实验的逐步验收记录</h3>
+<p>准备 ESP32-S3 开发板和确认可传数据的 USB 线。先不接任何外部 LED，运行 GPIO 工程。编译成功时保留末尾的镜像大小和构建成功信息；烧录时确认工具识别的芯片与 <code>set-target</code> 一致。若芯片实际为 C6，应先改目标，不要试图强行刷入 S3 镜像。</p>
+<p>打开 monitor 后，应看到启动日志，随后每秒出现 <code>hello: tick=0</code>、<code>tick=1</code>、<code>tick=2</code>。如果反复从 0 开始，就不是正常计数，要查看每次重启前的信息。若没有任何串口设备，先查线缆和设备枚举；若有设备但占用，关闭另一个串口监视器；若进入下载模式却没有应用日志，检查启动按键状态与复位过程。</p>
+<p>然后断电接外部 LED：经核实空闲的输出 GPIO → 470 Ω → LED 阳极，LED 阴极 → GND。LED 长脚通常是阳极，但剪脚后的器件不要只凭长度判断，可用万用表二极管档核对。在 <code>idf.py menuconfig</code> 的 <code>Hardware Hello lab</code> 中启用 LED 并填写核实过的引脚，保存、编译、烧录。GPIO 每秒改变一次状态，所以亮一秒、灭一秒，完整周期约两秒。</p>
+<p>日志正常而 LED 不亮时依次验证：配置是否启用、实际引脚是否一致、LED 极性、限流电阻连接、是否把 RGB 灯当普通 LED。不要一开始就改任务调度。实验报告写下“预期、实际、证据、修改、复测结果”五项，即使结果只是发现 LED 插反，也完成了一次合格调试。</p>
+<h2 id="第-5-章-烧录串口和日志">第 5 章　烧录、串口和日志</h2>
 <h3 id="51-烧录是什么">5.1 烧录是什么</h3>
 <p><code>idf.py flash</code> 通常通过 USB-UART 或 USB Serial/JTAG 把 bootloader、分区表和应用写入 Flash。<code>monitor</code> 读取串口日志。烧录成功不等于应用逻辑正确：还要看启动日志、任务初始化和外设探测结果。</p>
 <h3 id="52-日志是观测接口">5.2 日志是观测接口</h3>
 <p>使用分层日志：</p>
-<pre><code>ESP_LOGI(TAG, &quot;LinkIt mode=%d&quot;, mode);
+<pre><code class="language-c">ESP_LOGI(TAG, &quot;LinkIt mode=%d&quot;, mode);
 ESP_LOGW(TAG, &quot;sensor not found at 0x%02X&quot;, address);
-ESP_LOGE(TAG, &quot;frame CRC failed&quot;);</code></pre>
+ESP_LOGE(TAG, &quot;frame CRC failed&quot;);
+</code></pre>
 <p>日志必须包含足够上下文：板名、模块名、GPIO、地址、状态和错误码。</p>
 <h3 id="53-最小验证顺序">5.3 最小验证顺序</h3>
 <ol>
@@ -158,18 +280,102 @@ ESP_LOGE(TAG, &quot;frame CRC failed&quot;);</code></pre>
 <li>UI 或上位机展示。</li>
 </ol>
 <p>不要在第一步失败时跳到第七步排查。</p>
-<p>---</p>
-<h1 id="第三篇总线与协议">第三篇　总线与协议</h1>
-<h2 id="第-6-章uart先让两块板说话">第 6 章　UART：先让两块板说话</h2>
+<h3 id="54-usb-的三种用途不要混淆">5.4 USB 的三种用途不要混淆</h3>
+<p>USB 口可能接 USB-UART 芯片，也可能直接接 ESP32 原生 USB 引脚，还可能仅供电。USB-UART 把电脑的 USB 转成 MCU UART；原生 USB Serial/JTAG 由芯片支持调试和串口功能；USB OTG 则允许应用实现特定设备类别。接口都长得像 USB-C，并不代表它们接到了同一个控制器。</p>
+<p>看到供电灯亮但电脑没有设备，先换确认能传数据的 USB 线。看到串口却没应用日志，要确认日志实际走 UART0 还是原生 USB。原项目逻辑分析板配置 UART0 输出，注释指向 CH343；如果你换成无该芯片的开发板，原样配置不一定在你期待的 USB 口出现日志。</p>
+<h3 id="55-复位下载模式和启动引脚">5.5 复位、下载模式和启动引脚</h3>
+<p>复位让芯片重新走启动流程。某些引脚在启动时会被采样，用于选择启动模式，这些叫 strapping pins。它们在启动后可能又成为普通 GPIO，但外接电阻或设备仍会影响启动。</p>
+<p>不少 S3 开发板可通过 BOOT 与 RESET 组合进入下载模式，自动下载电路也可能借助串口控制线完成这一步。不同芯片、板卡接法有差别，应先识别板上标记和电路；不要把 GPIO0 作为所有 ESP32 的统一下载规则。</p>
+<h3 id="56-用复位日志建立证据链">5.6 用复位日志建立证据链</h3>
+<p>首次上电只验证电源与串口，不接其余模块。保存从启动第一行到异常位置的完整日志。如果重复出现相同启动头，说明设备可能在复位循环；观察原因是 brownout、panic、watchdog 还是外部复位。</p>
+<p>Brownout 指电压下降到监测阈值；它可能来自差的线缆、稳压器余量不足或无线突发电流。Watchdog 表示系统活性受到影响，常见是高优先级任务长时间不让出 CPU，而不是“芯片跑得不够快”。Panic 回溯需要匹配构建时的 ELF 才能可靠映射到源码。</p>
+<p>实验：运行计数示例 5 分钟，记录是否丢计数、重启和串口断连。再启用 LED，比较行为。最后才增加传感器。每次只加一个变量，故障才能被隔离。</p>
+<hr />
+<h1 id="第三篇-总线与协议">第三篇　总线与协议</h1>
+<h2 id="第-6-章-uart先让两块板说话">第 6 章　UART：先让两块板说话</h2>
 <p>UART 没有时钟线，双方预先约定波特率、数据位、停止位和校验。连接必须交叉：TX→RX、RX→TX，并共地。</p>
 <p>本项目的 LinkIt 链路使用 UART 加 DET，C6 与 S3 通过握手确认身份，成功后切换高速 UART。代码阅读顺序：先找 UART 初始化，再找握手字符串，再找状态机，再找发送队列。</p>
 <h3 id="粘包与半包">粘包与半包</h3>
 <p>串口是字节流，不是消息流。一次 <code>read</code> 可能只得到半帧，也可能得到多帧。接收器要使用缓冲区和状态机：</p>
-<pre><code>寻找帧头 → 读取固定头 → 读取长度 → 等待完整负载 → 校验 → 分发</code></pre>
-<h3 id="练习">练习</h3>
+<pre><code class="language-text">寻找帧头 → 读取固定头 → 读取长度 → 等待完整负载 → 校验 → 分发
+</code></pre>
+<h3 id="练习_4">练习</h3>
 <p>把 <code>examples/linkit_frame.md</code> 的设计实现为 Python 解码器，构造三种输入：半帧、两帧粘在一起、CRC 错误。</p>
-<p>---</p>
-<h2 id="第-7-章i²c地址寄存器和探测">第 7 章　I²C：地址、寄存器和探测</h2>
+<h3 id="61-波特率不是有效字节率">6.1 波特率不是有效字节率</h3>
+<p>8N1 表示 8 个数据位、无校验、1 个停止位；加上 1 个起始位，一个字节占用 10 个线路位。115200 波特的理论有效字节率约 <code>115200/10 = 11520 B/s</code>。2 Mbps 下约为 200000 B/s，尚未扣除帧头、校验、间隙和重传。</p>
+<p>发送字节 <code>0x55</code> 时，二进制是 01010101，UART 数据位低位先发，波形呈交替电平。115200 波特每位持续约 8.68 µs。逻辑分析仪若看到位宽约 104 µs，实际速率接近 9600，软件就算配置成 115200 也解不出正确文本。</p>
+<p>UART 输入不能直接连接 RS-232 接口，因为 RS-232 可能使用正负电压；RS-485 又是差分物理层。即使都叫“串口”，电气层也完全不同。</p>
+<h3 id="62-一个最小两板实验">6.2 一个最小两板实验</h3>
+<p>两块板分别供电，保持 3.3 V IO 域一致；先共地，再接 A.TX→B.RX、A.RX←B.TX。初期不接两块板的 3V3，避免两个稳压器相互供电。先用 115200、8N1、无流控。</p>
+<p>A 每秒发送 <code>hello 001\n</code>；B 把收到的十六进制字节打印到自己的调试串口。先证明单向，再做反向回显。B 接收函数返回多少字节就处理多少，不要假设每次收到完整一行。用不同分块大小注入数据，才算测试了流式接收。</p>
+<p>原项目 C6 配置 TX=22、RX=23、DET=21；所核对提交的 LA <code>linkit_pins.h</code> 宏定义是 TX=8、RX=6、DET=7，因此逻辑连接为 C6.22→LA.6、LA.8→C6.23、C6.21↔LA.7。这里是代码期望，不是给所有 PCB 版本背书；物理 pogo 焊盘顺序要用断电通断测量确认。</p>
+<h3 id="63-教学帧本书给出完整可运行解析器">6.3 教学帧：本书给出完整可运行解析器</h3>
+<p>为了练习半包、粘包和噪声恢复，本书定义 HH1 教学协议。它不是 LinkIt 的真实线格式，不能把它直接刷入原项目后期待互通。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>长度</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>帧头</td>
+<td>2 字节</td>
+<td>ASCII HH，即 0x48 0x48</td>
+</tr>
+<tr>
+<td>版本</td>
+<td>1 字节</td>
+<td>固定 1</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>1 字节</td>
+<td>1 表示温度</td>
+</tr>
+<tr>
+<td>序号</td>
+<td>2 字节</td>
+<td>小端，65535 后回到 0</td>
+</tr>
+<tr>
+<td>负载长度</td>
+<td>2 字节</td>
+<td>小端，最大 256</td>
+</tr>
+<tr>
+<td>负载</td>
+<td>N 字节</td>
+<td>温度为有符号 16 位百分之一摄氏度</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>2 字节</td>
+<td>小端 CRC16，覆盖版本到负载</td>
+</tr>
+</tbody>
+</table>
+<p>CRC 使用 CRC-16/CCITT-FALSE：多项式 0x1021，初值 0xFFFF，输入与输出均不反射，最终异或 0。字符串 <code>123456789</code> 的校验结果应为 0x29B1。CRC 检测偶发数据错误，不用于鉴别发送者身份，也不是加密。</p>
+<p><code>examples/protocol_lab.py</code> 包含编码器、流式解析器和自动测试，直接运行 <code>python examples/protocol_lab.py</code>。它不需要额外包或硬件。解析器对长度越界、坏 CRC 和未知版本逐字节寻找新帧头；设备集成时还应增加不完整帧等待超时，防止一段看似合法的头让接收器一直等待。</p>
+<h3 id="64-用定量目标验收">6.4 用定量目标验收</h3>
+<p>回环成功后连续发送 1000 帧，记录序号缺口、CRC 错误、重复帧和总耗时。若 1000 帧各 32 字节，115200 的纯发送理论下限约 <code>32000/11520 = 2.78 s</code>；不应期待 0.1 s 发完。协议设计必须先算带宽，再决定采样率。</p>
+<hr />
+<h3 id="65-按字节拆开-hh1-的一个真实例子">6.5 按字节拆开 HH1 的一个真实例子</h3>
+<p>温度 25.00 ℃ 用整数 2500 表示，即十六进制 <code>0x09C4</code>，小端负载为 <code>C4 09</code>。类型为 1、序号为 1 时，不含 CRC 的帧字节依次为：</p>
+<pre><code class="language-text">48 48 | 01 | 01 | 01 00 | 02 00 | C4 09
+帧头    版本 类型  序号    长度    温度
+</code></pre>
+<p>CRC 的输入从版本字节开始，不包括两个 <code>48</code>。为什么长度也参加 CRC？因为长度损坏也属于需要发现的传输错误。为什么又要先检查最大长度？因为还没收全帧就需要决定等待多少字节，不能先按一个未经验证的 65535 字节长度无限申请内存。</p>
+<p><code>struct.pack("&lt;h",2500)</code> 中 <code>&lt;</code> 明确小端，<code>h</code> 是有符号 16 位值；负温度使用补码，解包时不能当作无符号数。整数范围 −32768～32767，对应 −327.68～327.67 ℃，这是编码范围，不代表传感器可以测量全部范围。超出时编码函数会报错，应用必须决定拒绝、报警或使用其他类型，不能静默截断。</p>
+<p>解析器收到一次 <code>read()</code> 的数据可能只有 <code>48</code>，也可能含 3 帧，因此缓冲区保存未完成数据。找到帧头后先等固定头完整，再读长度，再等负载与 CRC。CRC 错误时丢弃候选帧头的第一个字节继续寻找；直接丢掉整块输入可能把紧接着的好帧也删掉。</p>
+<p>有一种问题只靠 CRC 解决不了：收到合法头后链路中断，解析器一直等剩余字节。集成时记录未完成帧的起始时间或最近进展时间，超过预算后清空候选状态。超时要大于最长合法帧的线速传输时间及允许停顿。例如 266 字节在 115200、8N1 下只在线路上就需约 23.1 ms；设为 1 ms 显然不合理。</p>
+<h3 id="66-用故障注入理解测试的价值">6.6 用故障注入理解测试的价值</h3>
+<p>运行 <code>python3 examples/protocol_lab.py</code>，应看到 7 组测试通过。逐个阅读测试：每个切分位置验证半帧，三帧合并验证粘包，篡改 CRC 后追加好帧验证恢复，错误版本和超大长度验证输入边界，负温度验证有符号换算，清空半帧验证超时后重启解析。</p>
+<p>接着做两个改动实验。第一，把 CRC 初值改为 0，已知向量测试必须失败，这说明测试没有只验证“同一套错误编码器和解码器能互通”。第二，删掉 CRC 失败后的滑动重同步，观察坏帧后的好帧是否消失。完成后撤销实验改动，让全部测试恢复通过。</p>
+<p>序号从 65535 回到 0 是正常回绕。若单发送端、无乱序且相邻帧间隔小于半个序号空间，可用 <code>(current−previous)&amp;0xFFFF</code> 判断增量：0 可能重复，1 连续，大于 1 可能丢帧。但设备重启、乱序和延迟旧帧都可能打破这个解释，需要会话标识或额外状态。不要仅凭一个差值就声称丢了几万个包。</p>
+<h2 id="第-7-章-i²c地址寄存器和探测">第 7 章　I²C：地址、寄存器和探测</h2>
 <p>I²C 使用 SDA、SCL 和 GND。设备通过 7 位地址识别，主机读写寄存器。传感器驱动通常包含：初始化、探测、配置、读取、缩放和错误处理。</p>
 <p>项目中 MLX90640、MAX17048、BME280、BH1750、SGP40 都体现了同一模式：总线层只负责字节传输，设备层负责寄存器语义，应用层负责业务数据。</p>
 <h3 id="常见故障">常见故障</h3>
@@ -181,60 +387,163 @@ ESP_LOGE(TAG, &quot;frame CRC failed&quot;);</code></pre>
 <li>电源电压不匹配；</li>
 <li>设备需要等待启动时间。</li>
 </ul>
-<h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>请根据这段 I²C 驱动代码生成“地址、寄存器、读写长度、错误条件、物理连线”的表格，
-并标出哪些值来自代码、哪些值需要查数据手册。</code></pre>
-<p>---</p>
-<h2 id="第-8-章spi采样与时序">第 8 章　SPI、采样与时序</h2>
+<h3 id="ai-提问模板_4">AI 提问模板</h3>
+<pre><code class="language-text">请根据这段 I²C 驱动代码生成“地址、寄存器、读写长度、错误条件、物理连线”的表格，
+并标出哪些值来自代码、哪些值需要查数据手册。
+</code></pre>
+<h3 id="71-一次寄存器读取的完整时序">7.1 一次寄存器读取的完整时序</h3>
+<p>假设教学器件 7 位地址为 0x76，需要读取寄存器 0xD0。一次常见事务为：START → 地址+写位 → ACK → 寄存器地址 → ACK → repeated START → 地址+读位 → ACK → 数据 → 主机 NACK → STOP。</p>
+<p>START 是 SCL 高时 SDA 从高变低；STOP 是 SCL 高时 SDA 从低变高。传输数据期间，SDA 通常应在 SCL 高时保持稳定。每传 8 位，接收方在第 9 个时钟给出 ACK 或 NACK。最后一个字节由主机 NACK 表示不再继续读取，属于正常结束，不一定是故障。</p>
+<p>7 位地址 0x76 在总线上写地址字节是 0xEC，读地址字节是 0xED；ESP-IDF 设备配置一般填写 0x76，而不是已经左移的 0xEC。寄存器地址又是另一个概念，不要混入器件地址。</p>
+<h3 id="72-上拉电阻为什么不能随便选">7.2 上拉电阻为什么不能随便选</h3>
+<p>开漏器件释放线路后，由上拉和总线电容形成上升沿。近似 <code>tr ≈ 0.8473 × Rp × Cbus</code>。假设 4.7 kΩ 与 100 pF，总线上升时间约 398 ns；若目标模式要求上升时间不大于 300 ns，这个组合就不满足。把 Rp 改为 2.2 kΩ 后约 186 ns，但低电平时需要更大的吸电流。</p>
+<p>上拉下界由器件能吸收的电流决定，可估算 <code>Rp_min = (Vdd - VOL_max)/IOL</code>。上界由上升时间要求决定。选型要在两者之间，再用波形确认。以上数值是教学计算；原板上拉值、总线电容尚未得到完整原理图验证。</p>
+<p>S3_Thermal 的板级定义使用 SDA=36、SCL=35、400 kHz。源码注释记录这版板子在 800 kHz 出现超时，因此“芯片支持更高时钟”不等于“整条总线能跑更高”。恢复稳定的第一步经常是缩短线、降低频率、确认上拉，而不是无限增加超时。</p>
+<h3 id="73-一个-esp-idf-55-新版-i²c-api-示例">7.3 一个 ESP-IDF 5.5 新版 I²C API 示例</h3>
+<p>下面片段展示 BME280 常见 0x76 地址读取芯片 ID 的路径，应放进完整 IDF 工程的 <code>app_main</code> 中；另一种地址是 0x77，取决于器件地址引脚。GPIO 用来示范，不代表你的板卡可直接照接。</p>
+<pre><code class="language-c">#include &quot;driver/i2c_master.h&quot;
+#include &quot;esp_check.h&quot;
+#include &quot;esp_log.h&quot;
+
+void app_main(void) {
+    i2c_master_bus_handle_t bus;
+    i2c_master_bus_config_t bc = {
+        .i2c_port = I2C_NUM_0,
+        .sda_io_num = 4, .scl_io_num = 5,
+        .clk_source = I2C_CLK_SRC_DEFAULT,
+        .glitch_ignore_cnt = 7,
+        .flags.enable_internal_pullup = false,
+    }; // 需要外部上拉；先确认这两个 GPIO 在实物上可用
+    ESP_ERROR_CHECK(i2c_new_master_bus(&amp;bc, &amp;bus));
+    i2c_device_config_t dc = {
+        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
+        .device_address = 0x76, .scl_speed_hz = 100000,
+    };
+    i2c_master_dev_handle_t dev;
+    ESP_ERROR_CHECK(i2c_master_bus_add_device(bus, &amp;dc, &amp;dev));
+    uint8_t reg = 0xD0, id = 0;
+    esp_err_t err = i2c_master_transmit_receive(dev, &amp;reg, 1, &amp;id, 1, 100);
+    if (err == ESP_OK) ESP_LOGI(&quot;probe&quot;, &quot;chip ID: 0x%02X&quot;, id);
+    else ESP_LOGE(&quot;probe&quot;, &quot;read failed: %s&quot;, esp_err_to_name(err));
+}
+</code></pre>
+<p><code>main/CMakeLists.txt</code> 需声明 <code>REQUIRES esp_driver_i2c</code>。对 BME280，预期 ID 为 0x60；若读到其他值，要确认实际器件，不能只把预期值改掉来“通过测试”。扫描到 ACK 只代表有人响应这个地址，不保证是你以为的芯片。</p>
+<h3 id="74-从原始数值到物理量">7.4 从原始数值到物理量</h3>
+<p>某些简单传感器只需线性缩放，而 BME280 等器件还要读取出厂校准参数进行补偿。两字节原始值 <code>0x12 0x34</code> 在大端解释为 4660，小端则是 13330。假设单位是 0.01 ℃，前者才是 46.60 ℃；字节序错误也可能生成一个“看起来像温度”的数，因此不能只凭值在正常范围就判断正确。</p>
+<p>环境模块应分别携带温度、湿度、气压、照度、VOC 状态与有效标志。SGP40 原始信号、算法生成的 VOC 指数和特定气体的 ppm 浓度不是同一个量；指数趋势有用，不意味着它是经过校准的浓度仪。每个显示值都要保留物理含义。</p>
+<hr />
+<h3 id="75-从电平到寄存器完整看一次读芯片-id">7.5 从电平到寄存器：完整看一次读芯片 ID</h3>
+<p>I²C 空闲时 SDA 与 SCL 都被上拉为高。主机让 SCL 保持高时 SDA 从高变低，这叫 START；相反变化叫 STOP。正常数据位在 SCL 低时变化，在 SCL 高时保持稳定。接收方在第九个时钟拉低 SDA 表示 ACK，放开则是 NACK。一个字节在总线上因此占九个时钟，不是八个。</p>
+<p>对于地址 0x76 的 BME280，读 0xD0 身份寄存器的典型事务为：START → <code>0xEC</code> → ACK → <code>0xD0</code> → ACK → 重复 START → <code>0xED</code> → ACK → 设备返回 <code>0x60</code> → 主机 NACK → STOP。<code>0xEC=(0x76&lt;&lt;1)|0</code> 表示写，<code>0xED=(0x76&lt;&lt;1)|1</code> 表示读。IDF 驱动配置仍填 7 位地址 <code>0x76</code>，驱动负责拼读写位，不能把线上字节误填到地址参数。</p>
+<p>为什么先写再读？这里的写只是设置设备内部寄存器索引，随后读出该寄存器。不同设备的索引宽度和读写规则可能不同，不能对所有传感器都套同一事务。读到 0x60 只是验证了身份与基本通信，温湿度压力测量还需要校准参数、配置和补偿算法。</p>
+<p>若地址后 NACK，先检查电源、接线、地址配置与启动等待。若地址 ACK、寄存器值不对，检查寄存器索引和读写时序。若 SDA 始终低，先找是否短路或某设备卡住，再考虑总线恢复；对电气短路不断重试命令没有作用。</p>
+<h3 id="76-开漏时钟拉伸与上拉功耗">7.6 开漏、时钟拉伸与上拉功耗</h3>
+<p>开漏输出只主动拉低，输出高时其实是释放总线，由上拉电阻充电产生高电平。因此多个器件可以共同把线拉低，而不会出现一端强推高、一端强拉低的正常总线争用。某些从设备会保持 SCL 低延迟下一位，这称为时钟拉伸，主机驱动必须按设备与控制器能力处理。</p>
+<p>3.3 V、4.7 kΩ 上拉在被持续拉低时，每根线流约 0.70 mA。两块模块各自带 4.7 kΩ 并在同一总线上，等效约 2.35 kΩ，拉低电流加倍。上拉太弱上升慢，太强又要求器件吸收更大电流。由此知道“扫描不到就再加一个上拉”不是无需计算的万能办法。</p>
+<h2 id="第-8-章-spi采样与时序">第 8 章　SPI、采样与时序</h2>
 <p>SPI 由时钟、MOSI、MISO、CS 组成。主机提供时钟，CS 选择设备。模式 0/1/2/3 决定时钟空闲电平和采样边沿。</p>
 <p><code>S3_LogicAnalyser</code> 使用 SPI 连接 Pico 采集部分，并把采样结果转成仪器帧；这正是“硬件时序→驱动缓冲区→协议帧→UI 图表”的完整链路。</p>
 <p>逻辑分析仪的核心不是“读 GPIO”，而是在固定采样率下可靠地捕捉边沿，并处理缓冲区、触发条件和丢样。软件工程师应把采样率、缓冲深度和吞吐量当作容量规划问题。</p>
-<h3 id="练习">练习</h3>
+<h3 id="练习_5">练习</h3>
 <p>画出一次 SPI 事务：CS 拉低、发送命令、等待若干时钟、读取数据、CS 拉高。再说明如果 CS 一直为低会发生什么。</p>
-<p>---</p>
-<h1 id="第四篇读懂这套项目">第四篇　读懂这套项目</h1>
-<h2 id="第-9-章linkit把多块板组织成系统">第 9 章　LinkIt：把多块板组织成系统</h2>
+<h3 id="81-cpol-与-cpha">8.1 CPOL 与 CPHA</h3>
+<p>CPOL 定义空闲时钟电平；CPHA 定义在哪个边沿采样。模式 0 是 CPOL=0、CPHA=0，即空闲低、第一个上升沿采样；模式 3 是空闲高、第二个上升沿采样。发送方应在另一个边沿附近改变数据，留出建立与保持时间。</p>
+<p>只看到 SPI 有方波还不够。逻辑分析仪要同时观察 CS、SCLK 和数据线，并使用正确模式解码。结果整体左移一位、偶尔最高位错误，优先检查模式与边沿，不要急着添加字节交换。</p>
+<h3 id="82-从机与主机的流量关系">8.2 从机与主机的流量关系</h3>
+<p>S3 作为 SPI 主机时提供时钟，RP2040 作为采集协处理器。主机不能假设从机收到命令的同一瞬间就已经产生结果，协议可能需要 READY 信号、状态轮询、分段读取或预先装好发送缓冲区。</p>
+<p>原项目 <code>shared/pico_la</code> 是 S3 侧链路实现。它的存在不等于仓库已经包含 RP2040 的采样固件。完整复刻需要额外确认协处理器固件及其协议版本；如果这一项缺失，可以先用可预测的测试数据模拟从机接口，但要把结果标记为模拟，不当作真实采样成功。</p>
+<h3 id="83-采样率采样深度捕获时间">8.3 采样率、采样深度、捕获时间</h3>
+<p>假设两路数字输入各 1 bit，以 10 MSa/s 采样，紧凑打包后数据速率是 <code>2 × 10M / 8 = 2.5 MB/s</code>。若实际每个采样点存成一个字节，则是 10 MB/s。64 KiB 缓冲区在后一种格式只覆盖约 6.55 ms。采样深度决定能看多久，采样率决定时间分辨率，二者不是一回事。</p>
+<p>2 Mbps UART 在 8N1 下只有约 0.2 MB/s 有效字节率，不可能持续实时传完上述 10 MB/s。因此应先触发捕获一小段，再慢慢上传；或降采样、压缩、只传边沿。软件中的“异步”不会凭空增加物理吞吐量。</p>
+<p>数字信号解码应保留每位多个采样点；采样率仅等于数据频率两倍通常不足以可靠判断窄脉冲和边沿位置。采样间隔为 100 ns 时，边沿时间戳至少存在采样量化误差，不能声称测出了 1 ns 的细节。</p>
+<h3 id="84-用已知信号验证采集">8.4 用已知信号验证采集</h3>
+<p>让 PWM 产生 1 kHz、50% 占空比，理论周期 1 ms、高低各 0.5 ms。共地后连接到单个采样输入，先低速捕获，检查周期与占空比，再升高频率。若所有边沿等比例错误，检查实际采样时钟；若偶发多边沿，检查输入悬空、串扰和信号完整性。</p>
+<p>UART 旁听只把分析仪 RX 接到被测 TX，正常情况下不往被测链路发送。I²C 旁听也应保持高阻，不主动给 ACK。测量仪器本身会增加电容和负载，这就是“探针接上去问题消失或出现”的原因之一。</p>
+<hr />
+<h1 id="第四篇-读懂这套项目">第四篇　读懂这套项目</h1>
+<h2 id="第-9-章-linkit把多块板组织成系统">第 9 章　LinkIt：把多块板组织成系统</h2>
 <p>LinkIt 的价值是统一主机和设备模块的通信。你可以把它看成一个嵌入式 RPC 系统，但它运行在 UART 和 ESP-NOW 上。</p>
 <h3 id="状态机">状态机</h3>
-<pre><code>DISCONNECTED
+<pre><code class="language-text">DISCONNECTED
       │发现设备
 HANDSHAKING
       │身份交换成功
 WIRED ─────────────┐
       │拔出 pogo    │重新插入
-WIRELESS ──────────┘</code></pre>
+WIRELESS ──────────┘
+</code></pre>
 <p>握手通常包含：询问、设备响应、ACK、MAC 地址交换、模式切换。设计状态机时，必须为超时、重复握手、设备重启、帧丢失和链路恢复定义行为。</p>
 <h3 id="帧协议">帧协议</h3>
-<p>一帧至少要有：魔数/版本、模块类型、长度、序号、负载和校验。模块类型让 C6 不需要知道每个传感器的具体实现，只需把数据路由到对应页面。</p>
+<p>设计新协议时可考虑魔数/版本、模块类型、长度、序号、负载和校验；原项目不同帧的实际字段必须逐个核对，不保证都具有这些字段。模块类型让 C6 不需要知道每个传感器的具体实现，只需把数据路由到对应页面。</p>
 <h3 id="阅读路径">阅读路径</h3>
-<pre><code>shared/linkit_sdk
+<pre><code class="language-text">shared/linkit_sdk
 → shared/instrument_protocol
 → C6_Screen/components/instrument_runtime
-→ 某一个 S3 工程的 main.c</code></pre>
+→ 某一个 S3 工程的 main.c
+</code></pre>
 <p>先理解数据如何流动，再理解每一行驱动代码。</p>
-<p>---</p>
-<h2 id="第-10-章lvgl-与-ui">第 10 章　LVGL 与 UI</h2>
+<h3 id="91-把握手当成分布式系统">9.1 把握手当成分布式系统</h3>
+<p>有线检测只是一个信号，它不证明对方固件已经启动。主机发送 WHO? 后等待响应；从机报告身份；主机确认；双方约定新速率并开始传数据。如果一方在另一方之前切速率，最后一个确认包可能读不到。</p>
+<p>稳健实现要规定谁先切换、何时切换、超时后回到哪个速率、重复 WHO? 是否重新响应。设备重启应清除旧会话状态，过期无线包不应重新激活一个旧模块。把每条转换画成“事件、前置条件、动作、超时、下一状态”，你就在用熟悉的分布式系统方法设计固件。</p>
+<h3 id="92-有线切无线并非简单换个-send-函数">9.2 有线切无线并非简单换个 send 函数</h3>
+<p>ESP-NOW 使用 Wi-Fi 无线电直接传消息，通常不需要连接家用路由器。双方信道、对端地址、载荷约束和回调处理都必须匹配。原项目无线 DAP 使用信道 6，共存的 LinkIt 需要与它一致。</p>
+<p>无线发送回调成功不应被当成远端应用已经执行成功。对关键请求，加入事务编号和应用层响应；超时可重试，但接收方应识别重复请求。例如同一个“复位 MCU”命令重放五次，与同一个“读取温度”命令重放五次，影响完全不同。</p>
+<h3 id="93-为什么不能直接发送-c-结构体">9.3 为什么不能直接发送 C 结构体</h3>
+<p><code>struct { uint8_t type; uint32_t value; }</code> 可能包含对齐填充，不一定是 5 字节。不同编译器、配置和架构可能不同。即便使用 packed，也要处理未对齐访问、端序、版本兼容和字段范围。</p>
+<p>对新设计，显式逐字段编码更容易验证。对原项目，先确认它实际使用的结构、打包规则和收发两端约定；不能凭本书的通用建议擅自修改其中一端。版本升级应让双方一起迁移，或者提供兼容解码。</p>
+<h3 id="94-一个源码取证案例gpio-注释冲突">9.4 一个源码取证案例：GPIO 注释冲突</h3>
+<p>本书核对的固件提交是 <code>e086e5e3c0039c5dcce43b96778e52a4c3b8ccd7</code>。LA 的 <code>board_pins.h</code> 一段文字说 TX/RX/DET 为 7/6/8，而 <code>linkit_pins.h</code> 最终宏为 8/6/7，后者还记录了此前接错导致握手失败的过程。</p>
+<p>处理方法依次是：搜索 <code>POGO_PIN_TX</code> 的引用 → 确认 UART 初始化使用哪个宏 → 检查是否有 Kconfig 或其他头文件覆盖 → 编译日志打印实际引脚 → 断电测 pogo 焊盘到 MCU 引脚的连通。源码决定软件意图，PCB 与测量决定真实连线；必须让两者一致。</p>
+<p>这也解释为什么“AI 读完 README 给出接线表”还不是完整硬件设计审查。教材提供的是证据方法，而不是把任何一个注释当成真理。</p>
+<hr />
+<h2 id="第-10-章-lvgl-与-ui">第 10 章　LVGL 与 UI</h2>
 <p>LVGL 是嵌入式 GUI 库。它需要显示驱动、输入设备、定时 tick 和线程安全的调用边界。<code>C6_Screen</code> 用 LVGL 显示热成像、逻辑分析波形、I²C/UART 监听和环境数据。</p>
 <p>UI 的数据更新应与采集任务解耦：采集任务生产结构化数据，运行时组件分发，UI 任务在合适的上下文更新控件。不要在中断里直接操作 LVGL。</p>
-<h3 id="ai-提问模板">AI 提问模板</h3>
-<pre><code>请把这个 UI 页面拆成“状态模型、数据输入、渲染、用户事件、生命周期”五部分，
-并告诉我如何写一个不依赖真实传感器的模拟数据源。</code></pre>
-<p>---</p>
-<h2 id="第-11-章无线-cmsis-dap">第 11 章　无线 CMSIS-DAP</h2>
+<h3 id="ai-提问模板_5">AI 提问模板</h3>
+<pre><code class="language-text">请把这个 UI 页面拆成“状态模型、数据输入、渲染、用户事件、生命周期”五部分，
+并告诉我如何写一个不依赖真实传感器的模拟数据源。
+</code></pre>
+<h3 id="101-像素颜色与帧缓冲的成本">10.1 像素、颜色与帧缓冲的成本</h3>
+<p>240×280 的屏幕有 67200 个像素。RGB565 用红 5 位、绿 6 位、蓝 5 位表示颜色，每像素 2 字节，因此一帧需要 134400 字节，约 131.25 KiB。双缓冲约 262.5 KiB，还不含控件、堆和其他任务。</p>
+<p>40 MHz SPI 理想传输率是 5 MB/s，一帧至少需要 26.88 ms；80 MHz 时约 13.44 ms。实际还有命令、DMA 准备、渲染和总线竞争。原项目 C6 配置 80 MHz，同时注释说明异常时需要降速。这不代表随便一条杜邦线都能可靠跑 80 MHz。</p>
+<p>只更新变化区域、使用小块绘图缓冲、降低刷新率，可以显著减少资源。显示一个每秒变化一次的温度没必要每秒重画 60 次全屏。</p>
+<h3 id="102-显示接口的引脚职责">10.2 显示接口的引脚职责</h3>
+<p>ST7789 类 SPI 屏幕常见 MOSI、SCLK、CS、D/C、RESET、BL。D/C 区分命令与像素数据，RESET 控制屏幕控制器复位，BL 是背光相关信号。背光亮只证明 LED 部分供电，不证明像素数据正确。</p>
+<p>屏幕面板的可见区域可能只是内部显存的一部分，因此需要 X/Y 偏移。原项目 C6 显示定义包含 240×280 面板、280×240 横屏 UI、轴交换和偏移。全屏偏移、镜像、颜色错序，是三个不同问题，分别检查窗口坐标、方向与 RGB565 字节顺序。</p>
+<h3 id="103-lvgl-flush-与缓冲区生命周期">10.3 LVGL flush 与缓冲区生命周期</h3>
+<p>LVGL 把待更新区域交给显示驱动。若驱动启动异步 DMA 后立即告诉 LVGL“完成”，LVGL 可能覆盖还在发送的内存，导致花屏。正确做法是在传输真正完成后通知 LVGL 释放缓冲区。</p>
+<p>这是 C 指针生命周期在硬件上的实例：函数返回不是外设完成。DMA 会在 CPU 执行其他代码时继续读内存，所以缓冲区必须具有足够长的生命周期和合适的内存属性。</p>
+<h3 id="104-触摸坐标标定">10.4 触摸坐标标定</h3>
+<p>触摸原始坐标不必等于屏幕像素坐标。先读取左上、右上、左下、右下，再判断是否交换 X/Y、是否需要镜像。简单线性映射是 <code>x = (raw_x - min_x) × (width - 1)/(max_x - min_x)</code>，最后夹紧到有效范围。</p>
+<p>先用十字点验证触摸坐标，再把坐标接入按钮。如果直接在复杂 UI 中调试，容易把触摸偏移误判成控件层级问题。原项目有固定标定参数，它们只代表对应屏幕和装配方向，替换面板后需重新标定。</p>
+<hr />
+<h2 id="第-11-章-无线-cmsis-dap">第 11 章　无线 CMSIS-DAP</h2>
 <p>CMSIS-DAP 是调试器与主机之间的协议；SWD 是调试器与目标 MCU 之间的物理接口。这个项目把 DAP 包从 S3 OTG 发射机通过 ESP-NOW 送到 S3 逻辑分析仪，再由接收机用 GPIO bit-bang 操作 SWD。</p>
-<pre><code>电脑 USB → S3_otg_cmsisdap → ESP-NOW → S3_LogicAnalyser → SWD → 目标 MCU</code></pre>
+<pre><code class="language-text">电脑 USB → S3_otg_cmsisdap → ESP-NOW → S3_LogicAnalyser → SWD → 目标 MCU
+</code></pre>
 <p>这里有三个独立问题：USB 是否枚举、无线帧是否到达、SWD 时序是否正确。排查时必须逐层验证，不能直接把“调试器不能连接”归因于某一个函数。</p>
 <p>SWD 连接至少涉及 SWCLK、SWDIO、nRESET 和 GND。目标 MCU 的电压域、复位状态和调试权限会影响结果。</p>
-<p>---</p>
-<h1 id="第五篇用-ai-高效学习和调试">第五篇　用 AI 高效学习和调试</h1>
-<h2 id="第-12-章ai-结对编程协议">第 12 章　AI 结对编程协议</h2>
+<h3 id="111-usb-枚举到底在做什么">11.1 USB 枚举到底在做什么</h3>
+<p>电脑接入设备后读取设备描述符、配置描述符、接口与端点信息。VID/PID 是标识的一部分，端点是收发数据的逻辑通道。CMSIS-DAP v2 常通过 USB Bulk 传输调试命令；设备出现在 USB 列表里只是枚举成功，离 SWD 通还差后面的无线和 GPIO 执行链。</p>
+<p>USB-UART 口不会因为应用发送了几个 DAP 字节就变成 CMSIS-DAP。S3 OTG 需要原生 USB 接到正确引脚、USB 栈配置和端点实现。自制 USB-C 设备还需要正确的连接器与 CC 配置，后文讲解。</p>
+<h3 id="112-swdio-为什么需要切换方向">11.2 SWDIO 为什么需要切换方向</h3>
+<p>SWD 是由调试端发起的时钟同步协议。请求阶段调试器驱动 SWDIO，读响应时目标 MCU 驱动它；中间有 turnaround 周期，双方必须按协议交接方向。双方同时输出相反电平会产生冲突，交接太早或太晚则可能读错 ACK。</p>
+<p>ACK 用来表示 OK、WAIT 或 FAULT；WAIT 意味着目标暂未就绪，应该按策略重试；FAULT 需要检查错误状态，而不是无限重发。数据还可能有奇偶校验。软件 bit-bang 的每一段延时都受中断和任务调度影响，因此原项目在 SWD 活动时让其他采集任务让路。</p>
+<h3 id="113-分层验收无线调试器">11.3 分层验收无线调试器</h3>
+<p>第一步用电脑确认 USB 枚举；第二步用请求计数确认 DAP 收包；第三步记录无线发送、接收和响应序号；第四步用逻辑分析仪看 SWCLK/SWDIO；第五步尝试读取已知目标的调试端口 ID；最后才进行停止、单步、内存读取等操作。</p>
+<p>测试目标使用自己的低压开发板。nRESET 通常低有效，但其驱动方式必须匹配目标复位电路，不能把调试器 GPIO 高电平硬顶到由别的电路拉低的线。存在不同电压域时需要合适的电平转换，而非仅靠软件降低时钟。</p>
+<p>无线引入往返延时和抖动。每个 SWD 位都跨无线来回一趟会极其低效；应尽可能把一组命令在接收端执行后再回传结果，这就是把时序敏感部分放在目标附近的价值。</p>
+<hr />
+<h1 id="第五篇-用-ai-高效学习和调试">第五篇　用 AI 高效学习和调试</h1>
+<h2 id="第-12-章-ai-结对编程协议">第 12 章　AI 结对编程协议</h2>
 <h3 id="121-先给上下文再提问题">12.1 先给上下文，再提问题</h3>
-<p>低质量问题：“这段代码怎么改？”  </p>
-<p>高质量问题：</p>
-<pre><code>目标：让 S3_LogicAnalyser 在不影响 SWD 的情况下暂停 I²C sniff。
+<p>低质量问题：“这段代码怎么改？”<br />
+高质量问题：</p>
+<pre><code class="language-text">目标：让 S3_LogicAnalyser 在不影响 SWD 的情况下暂停 I²C sniff。
 约束：ESP-IDF 5.5.x，不能改变 GPIO 分配，必须保留现有 LinkIt 帧格式。
 现象：SWD 读 IDCODE 偶发失败，日志如下……
-请输出：假设、证据、最小改动、验证步骤和回滚方式。</code></pre>
+请输出：假设、证据、最小改动、验证步骤和回滚方式。
+</code></pre>
 <h3 id="122-让-ai-读代码的顺序">12.2 让 AI 读代码的顺序</h3>
 <ol>
 <li>先让 AI 建目录地图；</li>
@@ -247,24 +556,85 @@ WIRELESS ──────────┘</code></pre>
 <p>要求 AI 给每条结论标注：源码证据、数据手册证据、测量证据或推测。GPIO 表可以来自源码，但“某个连接器在实物上的方向”必须看 PCB 或测量确认。</p>
 <h3 id="124-ai-生成代码的验收">12.4 AI 生成代码的验收</h3>
 <p>每次只接受一个可验证变化：编译、静态检查、串口日志、逻辑分析仪波形或单元测试。不要一次让 AI 重写整个工程。</p>
-<p>---</p>
-<h2 id="第-13-章调试方法从症状到根因">第 13 章　调试方法：从症状到根因</h2>
+<h3 id="125-一次有纪律的-ai-学习会话">12.5 一次有纪律的 AI 学习会话</h3>
+<p>你可以按下面的协议让 AI 带练：先让它用 300 字解释一个概念，再给一道计算题；你先回答，它指出错误原因；随后一起预测实验结果；最后用真实日志验证。顺序是理解、预测、测量、解释，不是复制代码、碰运气、继续复制。</p>
+<p>例如学习 I²C 上拉：你先算 4.7 kΩ 与 100 pF 的上升时间，再问 AI 是否满足 400 kHz 模式条件；接着测实际 SDA/SCL 波形。如果实际更慢，应讨论线路电容、模块并联和探头负载，而不是让 AI 捏造一个“推荐电阻”。</p>
+<p>给 AI 的材料包包含：目标、板卡型号和版本、GPIO 表、供电方式、工具链版本、源码提交、复现步骤、完整错误信息、已做实验。缺少原理图时应明确写“未提供原理图”，不要让它自动补全器件值。</p>
+<h3 id="126-请求-ai-审查原理图的具体问题">12.6 请求 AI 审查原理图的具体问题</h3>
+<pre><code class="language-text">请逐条审查这张已提供的原理图。
+1. 从输入电源到每个芯片供电脚，列出经过的器件和电压域。
+2. 检查 EN/RESET、启动脚、未用输入脚的状态。
+3. 对每条总线列出主机、从机、方向、上拉、片选和跨域问题。
+4. 区分图中明确证据、根据标注推断、仍需确认三类结论。
+5. 每个问题给出测量点、预期读数、可证伪的实验。
+禁止根据同类开发板图片补出本图没有的连接。
+</code></pre>
+<h3 id="127-把-ai-输出变成实验而不是权威">12.7 把 AI 输出变成实验，而不是权威</h3>
+<p>“可能是供电问题”还不是可执行结论。可执行版本应写：在 Wi-Fi 发包时测 3V3 与 GND，触发观察是否掉压；换短 USB 线重复；保持固件不变。如果变化随供电路径而变，证据增强；如果供电稳定而栈回溯指向空指针，转向软件。</p>
+<p>让 AI 至少提出两个竞争假设，并为每个假设设计一个能区分结果的实验。不要一次修改波特率、引脚、任务优先级和电阻，否则即使好了也不知道为什么。</p>
+<hr />
+<h2 id="第-13-章-调试方法从症状到根因">第 13 章　调试方法：从症状到根因</h2>
 <h3 id="131-分层定位">13.1 分层定位</h3>
-<pre><code>电源 → 时钟/复位 → 启动日志 → GPIO → 总线波形 → 驱动 → 协议 → UI</code></pre>
+<pre><code class="language-text">电源 → 时钟/复位 → 启动日志 → GPIO → 总线波形 → 驱动 → 协议 → UI
+</code></pre>
 <h3 id="132-一张故障表">13.2 一张故障表</h3>
-<table><thead><tr><th>症状</th><th>第一检查</th></tr></thead><tbody>
-<tr><td>无串口输出</td><td>端口、波特率、供电、启动模式</td></tr>
-<tr><td>设备未找到</td><td>GND、供电、地址、上拉、引脚复用</td></tr>
-<tr><td>UART 有乱码</td><td>波特率、TX/RX、地线、电平</td></tr>
-<tr><td>帧校验失败</td><td>长度、粘包、端序、CRC 初值</td></tr>
-<tr><td>屏幕白屏</td><td>背光、电源、SPI 引脚、初始化时序</td></tr>
-<tr><td>SWD 不稳定</td><td>SWCLK/SWDIO、目标电压、复位、并发干扰</td></tr>
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>第一检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无串口输出</td>
+<td>端口、波特率、供电、启动模式</td>
+</tr>
+<tr>
+<td>设备未找到</td>
+<td>GND、供电、地址、上拉、引脚复用</td>
+</tr>
+<tr>
+<td>UART 有乱码</td>
+<td>波特率、TX/RX、地线、电平</td>
+</tr>
+<tr>
+<td>帧校验失败</td>
+<td>长度、粘包、端序、CRC 初值</td>
+</tr>
+<tr>
+<td>屏幕白屏</td>
+<td>背光、电源、SPI 引脚、初始化时序</td>
+</tr>
+<tr>
+<td>SWD 不稳定</td>
+<td>SWCLK/SWDIO、目标电压、复位、并发干扰</td>
+</tr>
+</tbody>
+</table>
 <h3 id="133-记录实验">13.3 记录实验</h3>
-</tbody></table>
 <p>每次实验记录：日期、提交号、板号、供电、电缆、命令、日志、波形、结论。实验记录比“我好像改过一个地方”更有价值。</p>
-<p>---</p>
-<h1 id="第六篇实践路线">第六篇　实践路线</h1>
-<h2 id="第-14-章四周入门计划">第 14 章　四周入门计划</h2>
+<h3 id="134-万用表四个档位怎么用">13.4 万用表四个档位怎么用</h3>
+<p>电压档并联在两个测量点之间；电流档串联进入回路；电阻/通断档用于断电电路；二极管档用于判断导通方向和近似正向压降。电流档直接跨电源两端相当于通过很小的电阻短接，属于必须避免的接法。</p>
+<p>首次通断检查断开 USB 与电池。电容充电可能让通断档短暂响一下，不能把瞬间蜂鸣当成永久短路；等待读数稳定并观察两种表笔方向。用相同型号良好板对照，也比凭一个电阻值盲目判断可靠。</p>
+<p>GPIO 以 1 kHz 翻转时，普通万用表可能只显示平均值约 1.65 V，这不证明引脚卡在中间电压。要看时序使用示波器或逻辑分析仪。</p>
+<h3 id="135-示波器与逻辑分析仪分别回答什么">13.5 示波器与逻辑分析仪分别回答什么</h3>
+<p>逻辑分析仪回答“何时为高低、字节是什么、协议是否成立”；示波器回答“电压究竟多高、边沿多快、有没有振铃或掉压”。数字解码成功不代表电气裕量充足，数字解码失败也不一定是协议错误。</p>
+<p>探头地线会引入电感，长鳄鱼夹可能放大高速信号上的振铃。测低压开发板时保持短回路。台式示波器探头地通常与保护地相连，不能随意夹到非隔离电源的带电节点；本书实验限于 USB/低压直流电路，不涉及市电电路。</p>
+<h3 id="136-一张完整的排错记录">13.6 一张完整的排错记录</h3>
+<pre><code class="language-text">现象：S3 每次打开无线后复位。
+固定条件：固件提交 A，IDF 5.5.4，USB 供电，无传感器。
+假设一：峰值电流造成 3V3 下降。
+假设二：无线初始化任务栈不足。
+实验一：保持固件，换短线和已知正常电源，记录 reset reason。
+实验二：保持供电，记录堆和任务栈水位，保留完整回溯。
+结果：换供电后稳定，原回路可测到发射瞬间下降。
+结论：供电证据较强；继续定位线缆压降还是稳压器能力。
+</code></pre>
+<p>不要只记录最后结论。读数、日志和未排除的假设同样重要，这样未来换板后才能复用方法。</p>
+<hr />
+<h1 id="第六篇-实践路线">第六篇　实践路线</h1>
+<h2 id="第-14-章-四周入门计划">第 14 章　四周入门计划</h2>
 <h3 id="第-1-周只做软件">第 1 周：只做软件</h3>
 <ul>
 <li>安装 ESP-IDF 5.5.x；</li>
@@ -293,32 +663,385 @@ WIRELESS ──────────┘</code></pre>
 <li>跟踪一帧数据从传感器到 UI；</li>
 <li>选择逻辑分析仪或 CMSIS-DAP 作为专项。</li>
 </ul>
-<p>---</p>
-<h2 id="第-15-章从零采购与风险控制">第 15 章　从零采购与风险控制</h2>
+<h3 id="141-用验收关卡代替学过了">14.1 用验收关卡代替“学过了”</h3>
+<p>关卡一：能解释 LED 电阻计算，并实际读到接近预测的电压。关卡二：从空目录构建自己的固件，重启后计数重新开始。关卡三：两板 UART 连续发 1000 帧，知道丢帧率怎么算。关卡四：读取传感器 ID、原始值、换算值，并分别记录。关卡五：C6 接收模拟帧能显示，再切换到真实传感器。关卡六：断开链路后显示数据过期，而不是保留旧值伪装实时。</p>
+<p>这些关卡不要求固定四周完成。每天 45～90 分钟时，把硬件实验集中安排在有完整时间的日子，避免断断续续接线又忘记状态。</p>
+<h3 id="142-一次完整模块实验的交付物">14.2 一次完整模块实验的交付物</h3>
+<p>选择环境传感器模块，最终提交一份目录：<code>wiring.md</code> 保存接线和电压域，<code>sdkconfig</code> 保存配置，<code>logs/</code> 保存正常/断线日志，<code>tests/</code> 保存模拟帧和解析器测试，<code>measurements.md</code> 保存预期与实测差异。</p>
+<p>验收不是“屏幕上有数字”，而是：设备缺席时明确报错；重新连接后能恢复；单位正确；过期值带标志；运行 30 分钟不持续泄漏内存；异常长度不会越界；供电中断后能重新启动。每项用一个可重复步骤证明。</p>
+<hr />
+<h2 id="第-15-章-从零采购与风险控制">第 15 章　从零采购与风险控制</h2>
 <p>最小学习套件：一块 ESP32-S3 开发板、一块 ESP32-C6 开发板、USB 数据线、万用表、面包板和 3.3 V 传感器模块。先不要一开始购买全部热成像、屏幕和定制 PCB。</p>
-<p>完整复刻需要多个芯片板、屏幕、传感器、Pico/RP2040 采集部分、pogo 连接器和目标 MCU。作者的嘉立创页面目前没有公开 BOM/附件，采购应以设计图和实际料号为准，不能只按固件中的宏定义下单。</p>
+<p>完整复刻需要多个芯片板、屏幕、传感器、Pico/RP2040 采集部分、pogo 连接器和目标 MCU。此前读取的嘉立创详情页显示 BOM/附件为空，但尚未完成编辑器源文件核验；采购应以设计图和实际料号为准，不能据页面空状态断言设计中没有 BOM。</p>
 <h3 id="复刻顺序">复刻顺序</h3>
-<pre><code>编译 → 单板启动 → 两板 UART → LinkIt 握手 → 一个传感器 → UI → 无线 DAP → 定制 PCB</code></pre>
-<p>---</p>
-<h1 id="附录-a命令速查">附录 A　命令速查</h1>
-<pre><code>source ~/esp/esp-idf/export.sh
+<pre><code class="language-text">编译 → 单板启动 → 两板 UART → LinkIt 握手 → 一个传感器 → UI → 无线 DAP → 定制 PCB
+</code></pre>
+<h3 id="151-bom-应该怎样读">15.1 BOM 应该怎样读</h3>
+<p>BOM 是物料清单，通常包含位号、数值/型号、封装、数量、制造商料号和供应商编号。R12 是位号，4.7 kΩ 是数值，0603 可能是封装；同样写 0603 还要分英制与公制，英制 0603 常对应 1.6×0.8 mm。封装名称是机械焊盘规则，不是电气参数。</p>
+<p>电阻还需考虑精度和额定功率；电容要考虑耐压、介质和偏压降容；连接器要看间距、方向、高度和配对件。把“都是 10 µF”当成可任意替换，很容易采购到焊不上或实际有效容量不足的器件。</p>
+<h3 id="152-成本计算的正确单位">15.2 成本计算的正确单位</h3>
+<p>一套器件理论成本、一次下单金额和得到一套可用实物的成本不同。PCB 可能按数片起订，贴片有工程费和换料成本，小阻容可能有最小包装量，邮费和返修器件也要计入。</p>
+<p>本书采用公式：首次总成本 = 工具一次性成本 + 最小采购量物料 + PCB/钢网/贴片 + 外壳连接件 + 运费 + 合理备用件。后续每套成本不再重复计入工具。没有实际 BOM 与报价时只做预算，不能把先前估计当作真实采购单。</p>
+<p>先采购开发板实验套件，再按一块板的闭环完成采购、焊接和调试。热成像器件与细间距封装可以留到后面，不要把第一次焊接练习放在最贵的芯片上。</p>
+<hr />
+<h1 id="第七篇-从电路原理到可制造的板子">第七篇　从电路原理到可制造的板子</h1>
+<h2 id="第-16-章-读原理图把符号还原成电流和信号">第 16 章　读原理图：把符号还原成电流和信号</h2>
+<h3 id="161-原理图和-pcb-分别是什么">16.1 原理图和 PCB 分别是什么</h3>
+<p>原理图描述逻辑连接，PCB 描述铜箔、焊盘、过孔和器件在空间中的位置。原理图里两根线隔很远但有相同网络名，就可能直接相连；PCB 上两条线看起来靠得近，却可能完全绝缘。理解设计要同时看这两种视图。</p>
+<p>网络 Net 是所有电气上相连节点的集合。<code>3V3</code>、<code>GND</code>、<code>SCL</code> 是网络名，不是器件。位号 Reference 标识器件实例：R 为电阻，C 为电容，U 常表示集成电路，D 常表示二极管，J 常表示连接器，Q 常表示晶体管；不同团队命名习惯可能不同。</p>
+<p>一个元件有逻辑符号、引脚编号、封装焊盘编号和实物方向。原理图中的 U1.3 必须映射到封装的 3 号焊盘；如果库错误，即使 ERC/DRC 全绿，也可能制造出错误电路。因此自建器件库要逐脚核对符号、封装和真实器件。</p>
+<h3 id="162-一个教学原理图的逐线解释">16.2 一个教学原理图的逐线解释</h3>
+<pre><code class="language-text">USB 5V ── 输入保护 ── 稳压器 ── 3V3 ── MCU VDD
+                                  │
+                               去耦电容
+                                  │
+GND ──────────────────────────────┴── MCU GND
+
+3V3 ── 10kΩ ──┬── GPIO_IN
+               └── 按键 ── GND
+GPIO_OUT ── 470Ω ── LED ── GND
+</code></pre>
+<p>稳压器把输入电压转成适合 MCU 的 3.3 V，去耦电容在 MCU 附近给瞬态电流提供局部路径。按键松开时没有到地的直流通路，输入由 10 kΩ 拉高；按下时节点被拉到地，上拉电阻限制电流。LED 的电流从输出经电阻与 LED 返回地。</p>
+<p>这张图是教学功能框图，并不是可直接投板的完整产品图：稳压器具体器件、输入输出电容、使能电路、USB 接口、启动脚和保护器件都还需确定。完整产品设计要把框图中的每个方框展开，不能把没有展开的部分视作自动存在。</p>
+<h3 id="163-读图顺序">16.3 读图顺序</h3>
+<p>第一遍只涂出供电网络：从 USB 或电池开始，到稳压输出、每个 IC 的电源脚，再到 GND。标记电压和最大可能电流。第二遍看启动：EN/RESET 默认状态、启动脚上拉下拉、晶振、Flash、下载接口。第三遍才看数据：主从关系、引脚方向、片选、上拉、地址选择和跨电压域。</p>
+<p>最后检查所有连接器：从哪个方向看引脚编号？Pin1 是否有丝印？插头和插座是否镜像？排线翻面后顺序是否反转？对 pogo 磁吸接口，还要检查接触先后和是否可能偏移短接。连接器不是“最后随便画一下”的装饰。</p>
+<h3 id="164-用网络表和连通性对照代码">16.4 用网络表和连通性对照代码</h3>
+<p>建立下面这张审查表：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>软件配置</th>
+<th>原理图网络</th>
+<th>实物焊盘</th>
+<th>实测</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LinkIt TX</td>
+<td>POGO_PIN_TX</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>断电通断</td>
+<td>未确认</td>
+</tr>
+<tr>
+<td>LinkIt RX</td>
+<td>POGO_PIN_RX</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>断电通断</td>
+<td>未确认</td>
+</tr>
+<tr>
+<td>传感器电源</td>
+<td>驱动不说明</td>
+<td>3V3 或其他</td>
+<td>器件供电脚</td>
+<td>上电电压</td>
+<td>未确认</td>
+</tr>
+</tbody>
+</table>
+<p>不确定时填写“待核实”，不要用合理猜测填空。原理图、固件提交和 PCB 版本三者绑定后，才可以把表升级成正式接线说明。</p>
+<h3 id="自测与答案">自测与答案</h3>
+<p>问：两条线在图上交叉一定相连吗？答：不一定，要看连接点标记与 EDA 的网络定义。问：GND 符号是否天然连到大地？答：它只是电路的参考网络，是否与保护地相连取决于供电和仪器连接。</p>
+<h3 id="165-怎样读一页芯片手册而不迷路">16.5 怎样读一页芯片手册而不迷路</h3>
+<p>遇到新器件，按以下问题提取信息并写入设计表：它允许什么工作电压？每个引脚的方向是什么？上电复位条件是什么？默认状态是什么？通信时序有什么下限或上限？外部必须接哪些器件？封装的 Pin1 在哪里？本书给出理解方法，精确型号的保证值应进入项目自己的器件记录，不靠记忆。</p>
+<p><code>Absolute Maximum Ratings</code> 是不应超过的应力边界，不是推荐运行点；<code>Recommended Operating Conditions</code> 才用于确定正常工作范围。一个输入绝对最大值写到 <code>VDD+0.3 V</code>，不表示可以长期用保护二极管承受更高信号。掉电时 VDD=0，外部高电平还可能造成倒灌，这是多板连接尤其容易漏掉的条件。</p>
+<p>电气特性表的 Min、Typ、Max 分别代表最小、典型与最大。设计接口用保证的边界，不能拿两个典型值相减证明兼容。比如教学器件 A 保证高输出至少 2.7 V，器件 B 保证输入大于 2.3 V 被识别为高，则高电平噪声余量为 0.4 V；还需另算低电平余量。实际保证值通常附带供电、温度和负载条件，抄数字时必须一起保留。</p>
+<p>时序表里的建立时间是采样边沿前数据必须稳定多久，保持时间是边沿后仍需稳定多久。线越长、容性负载越大、驱动越弱，数据越晚到达。协议模式配置正确却偶发错位时，应检查这些裕量，而不只检查平均速率。</p>
+<h3 id="166-把软件宏还原成一张可审查的接线表">16.6 把软件宏还原成一张可审查的接线表</h3>
+<p>假设代码写 <code>TX=8</code>，它只告诉你外设输出路由到芯片 GPIO8；并未告诉你连接器第 8 针就是 TX。正确链条是：软件 GPIO8 → 芯片对应管脚或模组焊盘 → 原理图网络名 → PCB 连通网络 → 连接器实际编号 → 对端接收脚。链条中的任何一步都可能有版本差异。</p>
+<p>操作时先断电，依靠已确认的图纸和丝印辨认连接器方向，再用通断档核查关键网络。测到蜂鸣只说明阻值低于仪表某阈值，不一定是完全同一铜网；电路中的其他元件可能形成路径。必要时结合阻值、两方向测量及图纸判断。不要在带电板上用电阻档或通断档。</p>
+<p>一张可靠接线表必须写板名、板号版本、观察方向、连接器号、针号、网络、电压域、对端。仅有“TX 接 RX”无法表达机械方向，更无法防止插头镜像。读者掌握这一步，才开始从运行固件走向理解整板。</p>
+<h2 id="第-17-章-供电设计为什么软件一联网就重启">第 17 章　供电设计：为什么软件一联网就重启</h2>
+<h3 id="171-平均电流峰值电流和余量">17.1 平均电流、峰值电流和余量</h3>
+<p>用教学预算举例：主控与无线峰值假设 350 mA，屏幕背光 60 mA，传感器与其他电路 40 mA，合计 450 mA。若希望留出余量，电源路径应在该峰值以上还有能力，且实测输出电压稳定。这些数字用于演算，不代表原项目实测耗电。</p>
+<p>电源能力由整个路径中最弱的部分决定：适配器、USB 线、连接器、保护器件、稳压器、走线、热耗散。即使适配器标称 3 A，一根高阻线或过热的小 LDO 仍可能让板子掉压。</p>
+<p>线缆加连接器回路电阻若为 0.6 Ω，450 mA 时压降 <code>0.45×0.6 = 0.27 V</code>。输入从 5 V 降到 4.73 V；经过稳压器后是否还能保持输出，取决于其压差和工作条件。</p>
+<h3 id="172-ldo-与开关降压">17.2 LDO 与开关降压</h3>
+<p>LDO 是线性稳压器，结构简单、噪声相对易处理，但输入与输出的电压差主要转为热。5 V 降到 3.3 V、0.45 A 时，功耗约 <code>(5−3.3)×0.45 = 0.765 W</code>。如果粗略热阻为 100 ℃/W，温升估计达到 76.5 ℃。真实温升依赖封装、铜面积、气流和 PCB，不能只看额定输出电流。</p>
+<p>Buck 降压使用开关和电感转移能量，效率通常更好，但布局、纹波、瞬态和电磁干扰更复杂。假设输出 1.485 W、效率 90%，输入功率约 1.65 W，损耗约 0.165 W。这是按假设计算，不是保证任何转换器都达到 90%。</p>
+<p>LDO 输入必须高于输出一定裕量，称 dropout。普通单节锂电池电压从充满到放空变化很大，低压时单纯 LDO 未必还能稳定输出 3.3 V。要维持全程输出，需结合电池工作范围选择低压差、升降压或截止策略。</p>
+<h3 id="173-锂电池充电保护和电量计是不同模块">17.3 锂电池、充电、保护和电量计是不同模块</h3>
+<p>常规单节锂离子电池常见标称 3.7 V、充电上限 4.2 V，但不同化学体系和电池规格可能不同。充电器负责控制恒流/恒压，保护电路处理过充、过放、过流等条件，电量计估算剩余电量；MAX17048 是电量监测相关器件，不应因此认为它替代充电与保护功能。</p>
+<p>初学实验先用 USB 和已验证开发板，不自行拼装未知锂电池充电电路。学习电池设计时应画出“电池→保护→负载”和“USB→充电器→电池”两条路径，检查 USB 与电池同时存在时有没有反向电流或错误充电终止。电源路径管理 Load sharing 用来协调供电与充电，简单把两个电源并联不等价。</p>
+<h3 id="174-首次上电步骤与停机条件">17.4 首次上电步骤与停机条件</h3>
+<p>断电目视检查器件方向、焊桥、反装连接器；测电源对地是否明显短路；优先只接主控最小系统。若使用台式电源，先设正确电压和适合当前最小电路的限流；没有一个限流数值适用于所有板子。电压降为零且持续限流时应断电查短路，不要直接不断提高电流。</p>
+<p>上电观察输入电压、3V3、启动日志与局部发热。异常烫手、异味、供电持续限流或输出明显超出设计值时停止供电。启动正常后再逐个启用屏幕、无线和传感器，记录每一步电流变化。</p>
+<p>自测：LDO 标 1 A，为什么 0.45 A 就过热？答案：额定电流不是在任意压差和散热条件下都可持续使用，功耗和结温约束可能先到达。</p>
+<h2 id="第-18-章-输出驱动模拟输入与保护">第 18 章　输出驱动、模拟输入与保护</h2>
+<h3 id="181-为什么马达不能直接接-gpio">18.1 为什么马达不能直接接 GPIO</h3>
+<p>GPIO 是逻辑信号源，不是给马达、继电器或大功率背光供电的电源。马达启动电流可能比运行电流大，电感负载断电时还会产生反向电压。让 GPIO 控制晶体管，由独立功率路径承担电流。</p>
+<p>一个教学低端 N-MOS 开关是：电源正极→负载→MOS 漏极，MOS 源极→GND，GPIO 通过适当串联电阻到栅极，栅极有下拉保证 MCU 复位时默认关闭。对于直流电感负载，续流二极管通常跨负载两端，阴极接电源正极、阳极接漏极，正常供电时反偏。</p>
+<p>选 MOS 不能只看阈值电压 Vgs(th)：阈值通常只意味着开始流过很小电流，不代表已低阻导通。应看在 2.5 V/3.3 V 等实际栅压下保证的 Rds(on)、额定电流、功耗和栅电荷。原项目 C6 有 MOTOR_PWM 与 MOTOR_EN 宏，但仅凭这两个宏不能推断板上具体驱动电路。</p>
+<h3 id="182-pwm-的平均值与瞬时值">18.2 PWM 的平均值与瞬时值</h3>
+<p>PWM 用固定周期切换高低，占空比是高电平持续时间除以周期。3.3 V、50% 占空比平均电压约 1.65 V，但瞬间仍在 0 与 3.3 V 间跳变。LED 看起来变暗是平均光输出降低，不表示 GPIO 真正输出稳定模拟电压。</p>
+<p>PWM 频率低可能看到闪烁或听到噪声；频率过高会提高开关损耗并受外设分辨率约束。定时器时钟固定时，提高频率通常减少可用计数范围，从而降低占空比分辨率。</p>
+<h3 id="183-adc量化校准与输入范围">18.3 ADC、量化、校准与输入范围</h3>
+<p>ADC 把模拟电压转换成整数。理想 N 位 ADC 有 2^N 个等级，步长近似 <code>Vrange/2^N</code>。例如理想 12 位、3.3 V 范围步长约 0.806 mV；真实 ESP32 ADC 的可用范围、衰减、误差与校准方式依芯片而变，不能直接把这个理想模型当作精度指标。</p>
+<p>测电池电压可以用分压后接 ADC，但要确认最大电池电压分压后在有效输入范围内，考虑电阻误差、输入阻抗与采样保持电容。上电前先算最坏情况，再实测。分压节点的 RC 滤波能降低噪声，也会减慢响应。</p>
+<p>两点标定示例：已知 1.0 V 时读数 1200，2.0 V 时读数 2405，可用直线 <code>V = a×raw+b</code> 估计局部换算；但两点线性校准不能消除所有非线性与温漂。显示小数位数也不等于测量精度。</p>
+<h3 id="184-功率计的分流电阻">18.4 功率计的分流电阻</h3>
+<p>INA228 类监测器通过分流电阻上的压差推算电流：<code>I = Vshunt/Rshunt</code>。若 10 mΩ 流过 2 A，压降 20 mV，电阻功耗 40 mW；流过 10 A 时功耗变成 1 W，按电流平方增长。</p>
+<p>测量引线应在分流电阻两端进行 Kelvin 四线取样，避免把大电流走线的压降算入测量。软件的分流阻值和标定参数必须匹配实装器件。INA228 支持的范围不等于整块板连接器、铜箔和散热都支持该范围；本书不把这个入门项目当作高压或大电流设备使用。</p>
+<h2 id="第-19-章-usbpogo-与接口工程">第 19 章　USB、pogo 与接口工程</h2>
+<h3 id="191-usb-c-的供电与数据">19.1 USB-C 的供电与数据</h3>
+<p>USB-C 是连接器形态，不代表一定支持高速 USB、视频或 PD。一个 USB 2.0 设备可能只使用 VBUS、GND、D+、D− 和 CC 相关连接。典型受电端使用 CC1/CC2 各自的 Rd（常见标称 5.1 kΩ）声明角色，具体连接应按照所采用接口方案；不要把两个 CC 引脚直接当作同一网络处理。</p>
+<p>USB-UART 桥接芯片将 USB 数据转为 UART，原生 USB MCU 则直接处理 D+/D−。USB 插头正反可插的焊盘连接、ESD 防护、差分布线和连接器壳体处理都需要设计。即使只是全速 USB，也不应随意拉很长的分叉线。</p>
+<h3 id="192-pogo-的机械设计也是电气设计">19.2 pogo 的机械设计也是电气设计</h3>
+<p>pogo 是弹簧针触点，可能因为氧化、偏位、压力不足而产生间歇连接。必须定义连接器朝向、Pin1、配对关系、机械限位和接触时序。插入时电源先接、地后接可能导致信号脚通过保护二极管反向供电；具体风险取决于两板供电方式与保护设计。</p>
+<p>软件 DET 消抖可以减少接触抖动触发的反复切链，但修不了针脚物理短路。协议应在检测到插入后等待稳定，再握手；拔出时取消待发送事务并标记数据过期。</p>
+<h3 id="193-防反接防静电与电平转换">19.3 防反接、防静电与电平转换</h3>
+<p>ESD 二极管用于限制短暂静电冲击，但其电容、工作电压和布局位置需匹配接口。电平转换器用于两种逻辑电压域；I²C 的双向开漏转换和高速 SPI 的推挽转换不能随便互换。</p>
+<p>“串个电阻”可能限制部分故障电流，但不是通用 5 V→3.3 V 转换方案。一个适用于慢速单向输入的分压，也可能不适用于双向 SWDIO。接口设计需要先写方向、速率和电压，再选电路。</p>
+<h3 id="本章实验">本章实验</h3>
+<p>用两块分别供电的开发板模拟可插拔 UART，先断开信号验证超时，再断开全部连接验证重连。不在未经验证的自制板上带电反复错位插 pogo。目标是验证协议恢复逻辑，不是通过错误接线测试器件耐受性。</p>
+<h2 id="第-20-章-pcb-布局布线与制造检查">第 20 章　PCB 布局布线与制造检查</h2>
+<h3 id="201-从网表到铜箔">20.1 从网表到铜箔</h3>
+<p>布局先放固定机械件和连接器，再放主控、电源和功能模块。高电流回路要短且有足够导体截面，去耦靠近电源引脚，晶振与其匹配电路靠近芯片，天线区域遵守模组的净空要求。不要先把板子排得好看，再试图用细线绕完整个功能。</p>
+<p>每条信号都有返回电流。对高速边沿，返回路径倾向于在相邻参考平面上靠近信号线。跨越地平面缺口会扩大回路面积、增加干扰。所谓“低频信号”也可能有很快的边沿，因此不要只按时钟频率判断布线是否随意。</p>
+<h3 id="202-一个供电回路的布局练习">20.2 一个供电回路的布局练习</h3>
+<p>把稳压器、输入电容、输出电容和负载画成四个方块，标出大电流回路。若是 Buck，再加入电感、开关节点与反馈分压。开关节点应尽量紧凑，反馈采样远离噪声并按器件推荐连接输出。</p>
+<p>对初学者，成熟模组比裸芯片射频设计容易得多。使用带天线模组时仍需保证天线周围没有违反要求的铜箔、金属、电池或外壳。无线距离差不一定是 ESP-NOW 代码错误，也可能是天线被遮挡。</p>
+<h3 id="203-ercdrc-与功能正确性">20.3 ERC、DRC 与功能正确性</h3>
+<p>ERC 检查原理图的连接和电气规则，例如输入悬空、输出冲突。DRC 检查 PCB 的线宽、间距、过孔、未连网络等制造规则。两者都不会自动证明 I²C 地址没有冲突、USB 描述符正确、稳压器不会过热或传感器方向符合算法。</p>
+<p>检查应有三层：电气规则通过、制造规则通过、功能与最坏情况计算通过。最后由实测闭环确认。绿色勾选是工具覆盖的规则通过，不是整个产品通过。</p>
+<h3 id="204-投板文件与贴片文件">20.4 投板文件与贴片文件</h3>
+<p>Gerber 表达铜层、阻焊、丝印等图形；钻孔文件表达孔位和孔径；BOM 告诉工厂装什么；贴片坐标文件告诉机器装在哪里、朝哪个方向。不同厂商对坐标原点、旋转角和底层镜像约定可能不同，必须检查在线贴片预览。</p>
+<p>检查 Pin1、二极管极性、电解电容极性、连接器缺口和 MCU 方向。小板拼板后拆边位置是否影响连接器？安装孔是否与走线冲突？测试点是否能用探针接触？这些问题提前解决比拿到板子后飞线便宜。</p>
+<h3 id="205-为调试设计测试点">20.5 为调试设计测试点</h3>
+<p>至少让输入电源、3V3、GND、RESET/EN、关键 UART、I²C、SPI 和必要 SWD 信号易于接触。测试点丝印写网络名，旁边提供 GND，减少探头接错和长回路。原板没有测试点时，使用放大镜和断电测量识别位置，不在带电细脚芯片上盲目滑动表笔。</p>
+<p>自测：DRC 全通过，I²C 仍无响应，下一步是什么？答案：先看供电、地址、上拉、GPIO 映射与实际波形；DRC 不理解完整应用协议。</p>
+<h3 id="206-一块双层教学小板的布局顺序">20.6 一块双层教学小板的布局顺序</h3>
+<p>先画板框和安装孔，把 USB、按键、屏幕排线等受外壳约束的器件放好。主控模组天线朝板边，并保留所选模组要求的净空。然后把稳压器靠近输入和主要负载，输入输出电容按稳压器要求贴近引脚，避免用细长走线连接成大回路。</p>
+<p>再把每个数字芯片的去耦电容放到对应电源脚旁，观察电源脚→电容→地的回路，而不只是量元件中心距离。连接地的过孔位置也参与这个回路。传感器受热会影响读数，不应把测环境温度的器件紧贴发热稳压器；IMU 需要与机械坐标系对应，不能布板后再假定轴方向。</p>
+<p>布关键信号前先保留连续参考地。双层板如果底面被横七竖八的信号切碎，表面看仍有很多“地铜”，但返回路径可能很差。最后补地铜不一定救得回来，因此布局时就要为返回路径留位置。USB 差分、射频和开关电源的具体几何约束取决于板叠层与器件，不能把本书的概念图当成制造尺寸。</p>
+<p>布线完成后依次检查：未连线为零、DRC、地铜孤岛、丝印盖焊盘、连接器插拔空间、探针接触空间、元件方向、制造预览。保存版本并输出生产包，避免在下单后继续修改却忘记哪版交给工厂。首次样板是验证假设的工具，应预留测量与返修空间。</p>
+<h3 id="207-焊接与返修的最小知识">20.7 焊接与返修的最小知识</h3>
+<p>焊接需要让焊盘和元件端子同时达到合适温度，让焊料润湿表面；不是把一团焊锡粘在冷焊盘上。助焊剂有助于去除氧化和润湿，过量残留的清洁方式依产品而定。焊点是否可靠不能只凭亮不亮判断，不同焊料的表面外观会有差异。</p>
+<p>入门先练排针、直插电阻和较大贴片，使用废板或练习板观察连锡、虚焊、立碑与焊盘脱落。烙铁温度由焊料、焊盘热容量和工具能力决定，长时间加热可能损坏焊盘与器件。细间距芯片和底部焊盘器件需要更适合的设备与检查条件，不应把第一次焊接安排在最贵的模块上。</p>
+<p>焊完先断电检查相邻引脚短路与电源对地异常，再进入第 17 章的分阶段上电。返修记录精确到位号，例如“R12 实装 47 kΩ，设计为 4.7 kΩ”，比“板子不稳定，重焊了一下”更能积累可复用经验。</p>
+<h2 id="第-21-章-传感器数据为何需要算法和校准">第 21 章　传感器数据为何需要算法和校准</h2>
+<h3 id="211-热成像不等于读取-768-个温度寄存器">21.1 热成像不等于读取 768 个温度寄存器</h3>
+<p>MLX90640 是 32×24 阵列，共 768 个像素。驱动需要读取传感器数据与校准信息，进行温度换算，并处理子页、坏点和工作模式。阵列的刷新速率、完整图像刷新速率和屏幕刷新速率是三个不同概念。</p>
+<p>假设每像素用 32 位浮点发送，温度图负载为 <code>768×4 = 3072 B</code>；若每秒 8 张完整图，约 24576 B/s，已经超过 115200 UART 的理论有效字节率。使用百分之一度的 16 位整数则每图 1536 B，但必须定义量程、缩放、无效值和符号。</p>
+<p>这个计算解释了为什么原项目握手后使用高速链路。把 LCD 刷到 60 Hz 也不会让 8 Hz 的传感器产生 60 张新热图；UI 只是重复显示或插值，不能把插值当成新测量。</p>
+<h3 id="212-发射率与颜色映射">21.2 发射率与颜色映射</h3>
+<p>红外测温受物体发射率、环境反射和距离/视场影响。抛光金属可能主要反射环境，不能只凭屏幕颜色判断它的真实温度。用固定量程显示时，同一种颜色对应相同温度；自动拉伸量程时，即使温度变化不大，画面也可能变得很“热”。</p>
+<p>因此热图应同时显示最低、最高温度、量程和数据是否过期。学习阶段用稳定的温暖物体观察趋势，不把未经校准的自制设备当医学体温计。</p>
+<h3 id="213-陀螺仪加速度计和磁力计">21.3 陀螺仪、加速度计和磁力计</h3>
+<p>加速度计测量包括重力相关效应在内的比力，静止时可用于估算倾斜；陀螺仪测角速度，积分能得到角度变化但零偏会累积漂移；磁力计测磁场，可辅助航向但容易受电机、磁铁和金属影响。</p>
+<p>教学一维互补滤波可写成：<code>angle = α×(angle + gyro×dt) + (1−α)×acc_angle</code>。假设 α=0.98、dt=0.01 s，短期主要跟随陀螺仪，长期被加速度倾角缓慢拉回。它不是完整三维姿态算法，而且快速平移时加速度倾角可能不再可靠。</p>
+<p>原项目使用 LSM6DSOX 与 LIS3MDL，C3 板共享 SPI 但有独立 CS。装配方向决定坐标系；先规定 X/Y/Z 朝向，再做轴映射和符号转换，否则一个看似平滑的 3D 模型也可能在反方向转动。</p>
+<h3 id="214-测量误差预算">21.4 测量误差预算</h3>
+<p>误差包括传感器固有误差、温漂、安装位置、供电噪声、标定偏差、时间不同步和算法假设。显示 23.456 ℃并不证明精度达到 0.001 ℃。软件最好同时表示精度范围、时间戳与有效性，而非只追求更多小数位。</p>
+<p>练习：让温度传感器远离稳压器测一组，再贴近发热芯片测一组。如果温度升高，先问它测到的是环境还是板温。硬件布局可以直接改变你以为属于“算法”的问题。</p>
+<h2 id="第-22-章-把原项目拆成五条完整实践链">第 22 章　把原项目拆成五条完整实践链</h2>
+<h3 id="221-c6-屏幕主机">22.1 C6 屏幕主机</h3>
+<p>输入是按键、触摸和 LinkIt 数据；输出是 LCD、可能的振动反馈和链路请求。先运行彩条，不接从机；再读触摸坐标；然后向 UI 喂模拟温度；最后才连接真实从机。每一步保存截图与日志，四步分别证明显示、输入、UI 数据绑定和真实通信。</p>
+<p>源码入口从 <code>C6_Screen/main/main.c</code> 开始，板级引脚在 <code>components/board_pins</code>，UI 和运行时在 <code>components</code>，协议在 <code>shared</code>。组件名字中含 demo 不代表数据一定是模拟，应读初始化与调用路径确认。</p>
+<h3 id="222-esp32-s3-与-rp2040-逻辑分析模块">22.2 ESP32-S3 与 RP2040 逻辑分析模块</h3>
+<p>先确认 S3 正常启动，再确认 RP2040 供电和固件，随后验证 SPI 链路，最后输入已知 PWM 测捕获。没有 RP2040 固件时，只能验证 S3 启动和协议侧，不能把同步超时解释成 S3 编译器问题。</p>
+<p>采集测试先低速单通道，再双通道，最后提升采样率。旁听 I²C/UART 时关闭分析仪主动输出，确认没有改变被测设备行为。SWD 功能另做验收，因为它会主动驱动目标，不等同于被动旁听。</p>
+<h3 id="223-热成像模块">22.3 热成像模块</h3>
+<p>先探测器件，再成功读取校准信息，再确认连续子页更新，之后输出数值，最后显示热图。若初始化成功但每帧相同，查数据就绪和子页逻辑；若画面闪烁，查帧完整性、坏点处理和双缓冲；若温度整体偏离，查发射率、补偿与单位。</p>
+<p>本项目板级频率注释提供了一个真实案例：提升 I²C 频率可能让设置刷新率失败，从而使传感器留在低速默认配置。性能优化必须观察实际生效结果，不能只看你写入的目标值。</p>
+<h3 id="224-环境传感器模块">22.4 环境传感器模块</h3>
+<p>对每个器件建立 <code>present</code>、<code>valid</code>、<code>last_update</code> 与错误计数，不让一个传感器失效阻塞所有读数。BME280、BH1750、SGP40、MAX17048 的输出含义不同，别把电量估算与环境传感器混成一个“value”数组而不定义单位。</p>
+<p>查实际初始化参数确定 GPIO。环境工程头文件中可能保留从其他板复制来的宏和注释，不能看到 MLX90640 或 Pico 字样就认定这块板实装了它们。追到被调用的驱动参数，才有可靠的软件证据。</p>
+<h3 id="225-c3-姿态模块与尚待核实部分">22.5 C3 姿态模块与尚待核实部分</h3>
+<p>先分别读 IMU、磁力计身份，再静止记录零偏，再做单轴旋转，最后接姿态算法。C3 板头文件给出的 SPI 为 MISO=4、MOSI=5、SCLK=6、IMU CS=18、磁力计 CS=19；这仍需对照实际 PCB 版本。不要把 C3 的 GPIO 用法复制到 C6。</p>
+<p>代码仓库还包含功率计和 S3 OTG 工程，而此前作者主页核实到的是五个公开工程；二者不是严格一一对应。当前书稿没有取得所有可编辑原理图、BOM 和 RP2040 固件，因此提供的是已核对的软件架构和教学实现方法，不能宣称已经给出一套完全验证过的整机制造文件。</p>
+<h2 id="第-23-章-综合设计题与详细参考答案">第 23 章　综合设计题与详细参考答案</h2>
+<h3 id="231-题目设计一块温度显示从机">23.1 题目：设计一块温度显示从机</h3>
+<p>要求：USB 供电，主控采用已有 S3 开发板，I²C 传感器每秒更新一次，经 UART 发给显示主机；拔掉传感器时显示离线，插回后恢复；首次只使用桌面低压实验。</p>
+<p>先交付框图而不是代码：USB→开发板稳压→3V3→传感器，GPIO→I²C→传感器，UART TX/RX/GND→主机。写清每根线的方向、电压域和上拉位置。传感器板若自带电平转换或稳压，确认其标称接口，而不是仅凭“VIN”判断 IO 可承受电压。</p>
+<h3 id="232-参考设计调度与错误处理">23.2 参考设计：调度与错误处理</h3>
+<p>任务一每秒发起一次传感器读取，成功产生带时间戳和 valid 标记的 Sample；失败记录错误码，不把零填成有效温度。任务二从队列读取 Sample，转换为固定单位后发帧；显示端超过约定时间没有有效更新就标过期。</p>
+<p>传感器重试采用有限次数和间隔，不能在高优先级循环里无延时重试。队列长度设为小容量或覆盖最新值，因为用户关心当前温度，不关心断线恢复后慢慢重放 10 分钟前的温度。</p>
+<h3 id="233-参考设计带宽内存与测量">23.3 参考设计：带宽、内存与测量</h3>
+<p>每秒一帧，即使每帧 32 字节，115200 波特也远够用。无需先改到 2 Mbps。一个结构化 Sample 只需少量字节；屏幕帧缓冲远大于温度数据缓冲，内存优化应优先看显示配置而非省掉一个错误码。</p>
+<p>验收步骤：正常读数 1000 次；断开传感器验证离线；插回验证恢复；注入坏 CRC 验证拒绝；重复帧验证序号策略；断电重启验证初始化；交换收发端的不同分块大小验证流式解析。每一步都用日志或画面证明预期，不以“没崩溃”代替正确。</p>
+<h3 id="234-从温度从机迁移到原项目">23.4 从温度从机迁移到原项目</h3>
+<p>独立实验稳定后，再把读取服务接入原有模块生命周期，把 Sample 映射到原项目实际仪器帧，保持其版本和字段约定。先用模拟数据验证 C6 分发与 UI，再启用真实 I²C 数据源。最后测试 LinkIt 有线/无线切换下的重复帧、乱序和过期数据。</p>
+<p>至此你已经完成电路、驱动、协议、并发、UI 与故障恢复的一条纵向切片。剩余模块不是从零重学：热成像增加吞吐与标定，逻辑分析增加采样时序，CMSIS-DAP 增加双向总线与实时性，PCB 复刻增加封装、供电与制造约束。</p>
+<h2 id="第-24-章-术语表与最终毕业检查">第 24 章　术语表与最终毕业检查</h2>
+<h3 id="241-术语表">24.1 术语表</h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>本书中的含义</th>
+<th>容易混淆的点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GND</td>
+<td>电路参考网络</td>
+<td>不必等于保护地</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>可配置数字输入输出</td>
+<td>不保证任何引脚都能随意使用</td>
+</tr>
+<tr>
+<td>开漏</td>
+<td>主动拉低、释放后由上拉拉高</td>
+<td>不主动输出高电平</td>
+</tr>
+<tr>
+<td>推挽</td>
+<td>主动驱动高和低</td>
+<td>两个输出可能冲突</td>
+</tr>
+<tr>
+<td>上拉</td>
+<td>用电阻定义默认高电平</td>
+<td>不是用于给大负载供电</td>
+</tr>
+<tr>
+<td>LDO</td>
+<td>线性稳压器</td>
+<td>需计算发热与压差</td>
+</tr>
+<tr>
+<td>Buck</td>
+<td>开关降压转换器</td>
+<td>需要电感和正确布局</td>
+</tr>
+<tr>
+<td>DMA</td>
+<td>外设与内存间的直接数据搬运</td>
+<td>函数返回不表示搬运结束</td>
+</tr>
+<tr>
+<td>ISR</td>
+<td>中断服务程序</td>
+<td>不能像普通任务一样任意阻塞</td>
+</tr>
+<tr>
+<td>RTOS</td>
+<td>实时操作系统</td>
+<td>不自动保证每个任务都按时完成</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>检测传输差错的校验</td>
+<td>不提供身份认证</td>
+</tr>
+<tr>
+<td>Flash</td>
+<td>非易失存储</td>
+<td>容量变大不等于堆变大</td>
+</tr>
+<tr>
+<td>PSRAM</td>
+<td>外接扩展 RAM</td>
+<td>访问属性与引脚占用需确认</td>
+</tr>
+<tr>
+<td>BOM</td>
+<td>器件清单</td>
+<td>不等于制造文件全集</td>
+</tr>
+<tr>
+<td>Gerber</td>
+<td>PCB 层图形制造文件</td>
+<td>不包含全部电路设计语义</td>
+</tr>
+<tr>
+<td>ERC/DRC</td>
+<td>电气/制造规则检查</td>
+<td>不是功能正确性证明</td>
+</tr>
+<tr>
+<td>校准</td>
+<td>用参考条件建立修正关系</td>
+<td>不能凭空消除所有误差</td>
+</tr>
+<tr>
+<td>分辨率</td>
+<td>最小可区分变化</td>
+<td>不等于准确度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="242-毕业口试不看答案先回答">24.2 毕业口试：不看答案先回答</h3>
+<ol>
+<li>为什么 115200 UART 每秒传不了 115200 个字节？</li>
+<li>为什么输入悬空不等于低电平？</li>
+<li>为什么两块独立供电的板要共地，却不一定要接在一起的 3V3？</li>
+<li>为什么 I²C 扫到地址仍可能读不出有效温度？</li>
+<li>为什么 SPI 提高时钟后屏幕花了，却没有编译错误？</li>
+<li>为什么增加队列长度解决不了持续生产过快？</li>
+<li>为什么 Flash 容量、RAM 容量和 PSRAM 引脚要分别考虑？</li>
+<li>为什么代码宏定义、头文件注释和 PCB 连线可能互相冲突？</li>
+<li>为什么 CMSIS-DAP 枚举成功仍可能读不到 SWD ID？</li>
+<li>为什么 PCB 通过 DRC 仍不能直接认定可以量产？</li>
+</ol>
+<h3 id="243-参考答案与补课位置">24.3 参考答案与补课位置</h3>
+<p>第一题：8N1 一个字节占 10 位，理论上限约 11520 B/s，见第 6 章。第二题：高阻节点电压不确定，需要上拉下拉，见第 2 章。第三题：信号需要共同电压参考，但并联稳压输出可能回灌，见第 6、17 章。第四题：地址响应不证明器件身份、配置、校准和寄存器读取正确，见第 7 章。</p>
+<p>第五题：编译器不验证线路信号完整性，见第 8、10、20 章。第六题：平均生产率超过消费率会持续积压，见第 3 章。第七题：它们承担不同职责且外部内存占用引脚，见第 1、4 章。第八题：版本和复制遗留会造成差异，要追踪初始化并测量，见第 9、16 章。第九题：USB、无线和 SWD 是不同层，见第 11 章。第十题：DRC 不验证协议、功耗、热设计和元件功能，见第 20 章。</p>
+<p>如果你能不借助 AI 讲清上述答案，并独立完成第 23 章实验，说明已经建立这套系统的基本工程判断力。实际复刻仍应以所用 PCB 版本、真实器件和测量结果为最终依据。</p>
+<h1 id="附录-a-命令速查">附录 A　命令速查</h1>
+<pre><code class="language-bash">source ~/esp/esp-idf/export.sh
 idf.py --version
 idf.py set-target esp32s3
 idf.py build
 idf.py -p PORT flash monitor
-idf.py fullclean</code></pre>
-<h1 id="附录-b源码导航">附录 B　源码导航</h1>
-<table><thead><tr><th>想学的主题</th><th>先读</th></tr></thead><tbody>
-<tr><td>构建</td><td>各工程 <code>CMakeLists.txt</code></td></tr>
-<tr><td>芯片配置</td><td>各工程 <code>sdkconfig.defaults</code></td></tr>
-<tr><td>主机通信</td><td><code>shared/linkit_sdk</code></td></tr>
-<tr><td>仪器帧</td><td><code>shared/instrument_protocol</code></td></tr>
-<tr><td>SWD</td><td><code>shared/dap_engine</code></td></tr>
-<tr><td>无线 DAP</td><td><code>shared/wireless_dap</code></td></tr>
-<tr><td>热成像</td><td><code>shared/mlx90640</code>、<code>S3_Thermal</code></td></tr>
-<tr><td>UI</td><td><code>C6_Screen/components</code></td></tr>
-<h1 id="附录-c最终检查清单">附录 C　最终检查清单</h1>
-</tbody></table>
+idf.py fullclean
+</code></pre>
+<h1 id="附录-b-源码导航">附录 B　源码导航</h1>
+<table>
+<thead>
+<tr>
+<th>想学的主题</th>
+<th>先读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建</td>
+<td>各工程 <code>CMakeLists.txt</code></td>
+</tr>
+<tr>
+<td>芯片配置</td>
+<td>各工程 <code>sdkconfig.defaults</code></td>
+</tr>
+<tr>
+<td>主机通信</td>
+<td><code>shared/linkit_sdk</code></td>
+</tr>
+<tr>
+<td>仪器帧</td>
+<td><code>shared/instrument_protocol</code></td>
+</tr>
+<tr>
+<td>SWD</td>
+<td><code>shared/dap_engine</code></td>
+</tr>
+<tr>
+<td>无线 DAP</td>
+<td><code>shared/wireless_dap</code></td>
+</tr>
+<tr>
+<td>热成像</td>
+<td><code>shared/mlx90640</code>、<code>S3_Thermal</code></td>
+</tr>
+<tr>
+<td>UI</td>
+<td><code>C6_Screen/components</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="附录-c-最终检查清单">附录 C　最终检查清单</h1>
 <ul>
 <li>[ ] 能说出每块板的职责和芯片目标；</li>
 <li>[ ] 能独立编译至少一个工程；</li>
@@ -329,4 +1052,4 @@ idf.py fullclean</code></pre>
 <li>[ ] 能用一次实验验证一个假设；</li>
 <li>[ ] 能记录提交号、配置和测量结果。</li>
 </ul>
-<p>当这些项目完成后，你已经掌握了阅读和改造这套多板嵌入式系统所需的基本方法。</p></div></main></div><a class="top" href="#top">↑ 顶部</a><script>const p=document.querySelector('#progress');const update=()=>{const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max?Math.min(100,y/max*100):0)+'%'};addEventListener('scroll',update,{passive:true});update();</script></body></html>
+<p>当这些项目完成后，你已经掌握了阅读和改造这套多板嵌入式系统所需的基本方法。</p></div></main></div><a class="top" href="#top">↑ 顶部</a><script>document.querySelectorAll('.book table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.before(w);w.append(t)});const p=document.querySelector('#progress');const update=()=>{const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;p.style.width=(max?Math.min(100,y/max*100):0)+'%'};addEventListener('scroll',update,{passive:true});update();</script></body></html>
